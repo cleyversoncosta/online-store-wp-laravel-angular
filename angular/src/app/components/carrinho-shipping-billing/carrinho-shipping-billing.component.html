@@ -1,0 +1,263 @@
+    <form [formGroup]="billingForm" (ngSubmit)="onSubmit()">
+        <div class="col-md-12 bg-white rounded shadow-sm p-3">
+            <div class="bg-light p-2 font-weight-bold">DADOS DO COMPRADOR</div>
+
+            <div class="form-group mt-2">
+                <label for="nome" class="font-weight-bold">Nome completo</label>
+                <input type="text" class="form-control" formControlName="nome" [ngClass]="{ 'is-invalid': submitted && fb.nome.errors }" />
+                <div *ngIf="submitted && fb.nome.errors" class="invalid-feedback">
+                    <div *ngIf="fb.nome.errors.required">Nome é obrigatório</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="email" class="font-weight-bold">E-mail</label>
+                        <input type="email" class="form-control" formControlName="email" placeholder="ex: meuemail@email.com.br"  [ngClass]="{ 'is-invalid': submitted && fb.email.errors }"/>
+                        <div *ngIf="submitted && fb.email.errors" class="invalid-feedback">
+                            <div *ngIf="fb.email.errors.required">E-mail é obrigatório</div>
+                            <div *ngIf="fb.email.errors.email">E-mail não é válido</div>
+                        </div>
+
+                        <small id="emailHelp" class="form-text text-muted">Nunca compartilharemos seu e-mail com ninguém.</small>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="email_conf" class="font-weight-bold">Confirmar e-mail</label>
+                        <input type="email" class="form-control" formControlName="email_conf" placeholder="ex: meuemail@email.com.br"  [ngClass]="{ 'is-invalid': submitted && fb.email_conf.errors }" />
+                        <div *ngIf="submitted && fb.email_conf.errors" class="invalid-feedback">
+                            <div *ngIf="fb.email_conf.errors.required">Obrigatório confirmar o e-mail</div>
+                            <div *ngIf="fb.email_conf.errors.email">E-mail não é válido</div>
+                            <div *ngIf="fb.email_conf.errors.mustMatch">E-mails não são iguais</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-4">
+
+                    <div class="form-group">
+                        <label for="cpf" class="font-weight-bold">CPF</label>
+                        <input type="text" class="form-control" formControlName="cpf" placeholder="000.000.000-00" mask="000.000.000-00"  [ngClass]="{ 'is-invalid': submitted && fb.cpf.errors }" />
+                        <div *ngIf="submitted && fb.cpf.errors" class="invalid-feedback">
+                            <div *ngIf="fb.cpf.errors.required">CPF é obrigatório</div>
+                            <div *ngIf="fb.cpf.errors.validaCPF">CPF não é válido</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <div class="font-weight-bold pb-2">Telefone</div>
+                        <input type="text" class="form-control" formControlName="telefone" placeholder="(00) 0 0000-0000" mask="(00) 0 0000-0000"  [ngClass]="{ 'is-invalid': submitted && fb.telefone.errors }" />
+                        <div *ngIf="submitted && fb.telefone.errors" class="invalid-feedback">
+                            <div *ngIf="fb.telefone.errors.required">Telefone é obrigatório</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <div class="font-weight-bold pb-2">Data de nascimento</div>
+                        <input type="text" class="form-control" formControlName="data_nascimento" placeholder="DD/MM/AAAA" mask="00/00/0000"  [ngClass]="{ 'is-invalid': submitted && fb.data_nascimento.errors }" />
+                        <div *ngIf="submitted && fb.data_nascimento.errors" class="invalid-feedback">
+                            <div *ngIf="fb.data_nascimento.errors.required">Data de nascimento é obrigatório</div>
+                            <div *ngIf="fb.data_nascimento.errors.validaDate">Data não é válida</div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-3">
+                    <div class="form-group">
+                        <label for="cep" class="font-weight-bold">CEP</label>
+                        <input type="text" class="form-control" formControlName="cep" #cepBiling (blur)="obterDadosCEP(cepBiling.value, 'billing')" placeholder="00000-000" mask="00000-000"  [ngClass]="{ 'is-invalid': submitted && fb.cep.errors }" />
+                        <div *ngIf="submitted && fb.cep.errors" class="invalid-feedback">
+                            <div *ngIf="fb.cep.errors.required">CEP é obrigatório</div>
+                            <div *ngIf="fb.cep.errors.validaCEPDadosBilling">CEP não é válido</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-9">
+                    <div class="form-group">
+                        <label for="logradouro" class="font-weight-bold">Logradouro</label>
+                        <input type="text" class="form-control" formControlName="logradouro"  [ngClass]="{ 'is-invalid': submitted && fb.logradouro.errors }" />
+                        <div *ngIf="submitted && fb.logradouro.errors" class="invalid-feedback">
+                            <div *ngIf="fb.logradouro.errors.required">Logradouro é obrigatório</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-2">
+                    <div class="form-group">
+                        <label for="logradouro_numero" class="font-weight-bold">Número</label>
+                        <input type="text" class="form-control" formControlName="logradouro_numero"  [ngClass]="{ 'is-invalid': submitted && fb.logradouro_numero.errors }" />
+                        <div *ngIf="submitted && fb.logradouro_numero.errors" class="invalid-feedback">
+                            <div *ngIf="fb.logradouro_numero.errors.required">Número é obrigatório</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="complemento" class="font-weight-bold">Complemento</label>
+                        <input type="text" class="form-control" formControlName="complemento" />
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="bairro" class="font-weight-bold">Bairro</label>
+                        <input type="text" class="form-control" formControlName="bairro"  [ngClass]="{ 'is-invalid': submitted && fb.bairro.errors }" />
+                        <div *ngIf="submitted && fb.bairro.errors" class="invalid-feedback">
+                            <div *ngIf="fb.bairro.errors.required">Bairro é obrigatório</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="cidade" class="font-weight-bold">Cidade</label>
+                        <input type="text" class="form-control" formControlName="cidade" [ngClass]="{ 'is-invalid': submitted && fb.cidade.errors }" />
+                        <div *ngIf="submitted && fb.cidade.errors" class="invalid-feedback">
+                            <div *ngIf="fb.cidade.errors.required">Cidade é obrigatório</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="uf" class="font-weight-bold">Estado</label>
+
+                        <select class="form-control" formControlName="uf" [ngClass]="{ 'is-invalid': submitted && fb.uf.errors }" >
+                            <option value="">Estado</option>
+                            <option *ngFor="let estado of estados" value="{{estado.sigla}}">{{estado.nome}}</option>
+                        </select>
+                        <div *ngIf="submitted && fb.uf.errors" class="invalid-feedback">
+                            <div *ngIf="fb.uf.errors.required">Estado é obrigatório</div>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label class="font-weight-bold">País</label>
+                        <input type="text" class="form-control" value="Brasil" readonly/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 mb-2">
+                <input type="checkbox" [checked]="buyer_equals_shipping" (click)="setShippingAddress()" />
+                <span> Os dados do comprador são os mesmos dados para envio do produto.</span>
+            </div>
+
+            <button [disabled]="valorAPagar === 0" [hidden]="!buyer_equals_shipping" type="submit" class="btn btn-dark rounded-pill py-2 btn-block">Prosseguir com  Pagamento</button>
+        </div>
+    </form>
+
+    <form [formGroup]="shippingForm" (ngSubmit)="onSubmit()">
+    <div class="mt-4" [hidden]="buyer_equals_shipping">
+        <div class="col-md-12 bg-white rounded shadow-sm p-3">
+            <div class="bg-light p-2 font-weight-bold">DADOS PARA ENVIO</div>
+
+            <div class="form-group mt-2">
+                <label for="nome" class="font-weight-bold">Nome completo</label>
+                <input type="text" class="form-control" formControlName="nome" [ngClass]="{ 'is-invalid': submitted && fs.nome.errors }" />
+                <div *ngIf="submitted && fs.nome.errors" class="invalid-feedback">
+                    <div *ngIf="fs.nome.errors.required">Nome é obrigatório</div>
+                </div>      
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="cep" class="font-weight-bold">CEP</label>
+                        <input type="text" class="form-control" formControlName="cep" #cepShipping (blur)="obterDadosCEP(cepShipping.value, 'shipping')" placeholder="00000-000" mask="00000-000" [ngClass]="{ 'is-invalid': submitted && fs.cep.errors }" />
+                        <div *ngIf="submitted && fs.cep.errors" class="invalid-feedback">
+                            <div *ngIf="fs.cep.errors.required">CEP é obrigatório</div>
+                            <div *ngIf="fs.cep.errors.validaCEPDadosShipping">CEP não é válido</div>
+                        </div>      
+                    </div>
+                </div>
+                <div class="col-12 col-md-8">
+                    <div class="form-group">
+                        <label for="logradouro" class="font-weight-bold">Logradouro</label>
+                        <input type="text" class="form-control" formControlName="logradouro" [ngClass]="{ 'is-invalid': submitted && fs.logradouro.errors }" />
+                        <div *ngIf="submitted && fs.logradouro.errors" class="invalid-feedback">
+                            <div *ngIf="fs.logradouro.errors.required">Logradouro é obrigatório</div>
+                        </div>      
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-12 col-md-2">
+                    <div class="form-group">
+                        <label for="logradouro_numero" class="font-weight-bold">Número</label>
+                        <input type="text" class="form-control" formControlName="logradouro_numero" [ngClass]="{ 'is-invalid': submitted && fs.logradouro_numero.errors }" />
+                        <div *ngIf="submitted && fs.logradouro_numero.errors" class="invalid-feedback">
+                            <div *ngIf="fs.logradouro_numero.errors.required">Número é obrigatório</div>
+                        </div>                              
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="complemento" class="font-weight-bold">Complemento</label>
+                        <input type="text" class="form-control" formControlName="complemento" [ngClass]="{ 'is-invalid': submitted && fs.complemento.errors }" />
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="bairro" class="font-weight-bold">Bairro</label>
+                        <input type="text" class="form-control" formControlName="bairro" [ngClass]="{ 'is-invalid': submitted && fs.bairro.errors }" />
+                        <div *ngIf="submitted && fs.bairro.errors" class="invalid-feedback">
+                            <div *ngIf="fs.bairro.errors.required">Bairro é obrigatório</div>
+                        </div>                            
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="cidade" class="font-weight-bold">Cidade</label>
+                        <input type="text" class="form-control" formControlName="cidade" [ngClass]="{ 'is-invalid': submitted && fs.cidade.errors }" />
+                        <div *ngIf="submitted && fs.cidade.errors" class="invalid-feedback">
+                            <div *ngIf="fs.cidade.errors.required">Cidade é obrigatório</div>
+                        </div>                            
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="uf" class="font-weight-bold">Estado</label>
+                        <select class="form-control" formControlName="uf" [ngClass]="{ 'is-invalid': submitted && fs.uf.errors }">
+                            <option value="">Estado</option>
+                            <option *ngFor="let estado of estados" value="{{estado.sigla}}">{{estado.nome}}</option>
+                        </select>
+                        <div *ngIf="submitted && fs.uf.errors" class="invalid-feedback">
+                            <div *ngIf="fs.uf.errors.required">Estado é obrigatório</div>
+                        </div>                            
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label class="font-weight-bold">País</label>
+                        <input type="text" class="form-control" value="Brasil" readonly/>
+                    </div>
+                </div>
+            </div>
+
+            <button [disabled]="valorAPagar === 0" type="submit" class="btn btn-dark rounded-pill py-2 btn-block" >Prosseguir com  Pagamento</button>
+
+        </div>
+    </div>
+    </form>

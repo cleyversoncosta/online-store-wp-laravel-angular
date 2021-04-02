@@ -1,0 +1,147 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-4 offset-md-4 my-3">
+            <form #fRastreio="ngForm" novalidate>
+                <p class="text-center mb-2">Para acompanhar em qual etapa do processo de envio/entrega está seu produto, basta informar o código de rastreio que você recebeu por e-mail no formulário abaixo e clicar no botão "Rastrear produto".</p>
+                <div class="mb-2"><input type="text" class="form-control" placeholder="Código de rastreio" name="trackid" id="trackid" [(ngModel)]="trackID" ngModel #trackIDL="ngModel" required [class.is-invalid]="!trackIDL.valid && trackIDL.touched" /></div>
+                <div *ngIf="!trackIDL.valid && trackIDL.touched" class="invalid-feedback">Nome é obrigatório</div>
+                <button type="submit" [disabled]="!fRastreio.valid" class="btn btn-primary btn-block" (click)="obterRastreio()">Rastrear produto</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12" *ngIf="trackDados != ''">
+            <div class="my-2">
+                <div class="col-12 py-1"><b>Código: </b>{{trackDados.codigo}}</div>
+                <div class="col-12 py-1"><b>Tipo: </b>{{trackDados.servico}}</div>
+            </div>
+
+            <div class="mb-4 rounded border-3" *ngFor="let evento of trackDados.eventos" [ngClass]="{
+                    'blue': evento.status.toLowerCase() === 'objeto encaminhado',
+                    'red': evento.status.toLowerCase() === 'objeto mal encaminhado',
+                    'amber': evento.status.toLowerCase() === 'objeto aguardando retirada no endereço indicado',
+                    'green': evento.status.toLowerCase() === 'objeto postado' || evento.status.toLowerCase() ==='objeto entregue ao destinatário'
+                }">
+                <div class="col-12 py-3 lighten-3" [ngClass]="{
+                        'blue': evento.status.toLowerCase() === 'objeto encaminhado',
+                        'red': evento.status.toLowerCase() === 'objeto mal encaminhado',
+                        'amber': evento.status.toLowerCase() === 'objeto aguardando retirada no endereço indicado',
+                        'green': evento.status.toLowerCase() === 'objeto postado' || evento.status.toLowerCase() ==='objeto entregue ao destinatário'
+                    }">
+                    <b>{{evento.local}}</b>
+                    <div class="btn-floating track-fab waves-effect waves-light white">
+                        <i [ngClass]="{
+                            'fa-envelope': evento.status.toLowerCase() === 'objeto postado',
+                            'fa-shipping-fast blue-text': evento.status.toLowerCase() === 'objeto encaminhado',
+                            'fa-random red-text': evento.status.toLowerCase() === 'objeto mal encaminhado',
+                            'fa-building amber-text': evento.status.toLowerCase() === 'objeto aguardando retirada no endereço indicado',
+                            'fa-home': evento.status.toLowerCase() ==='objeto entregue ao destinatário',
+                            'green-text': evento.status.toLowerCase() === 'objeto postado' || evento.status.toLowerCase() ==='objeto entregue ao destinatário'
+                        }" class="mr-1 fas"></i></div>
+                </div>
+                <div class="col-12 py-3 mb-2" style="border-bottom: 1px solid #e0e0e0">
+                    <b>Data:</b> {{evento.data}} às {{evento.hora}}
+                    <div class="btn-floating track-fab waves-effect waves-light white" (click)="open(contentRastreioInfo, evento.status.toLowerCase())">
+                        <i class="mr-1 fas fa-question-circle" [ngClass]="{
+                            'green-text': evento.status.toLowerCase() === 'objeto postado' || evento.status.toLowerCase() ==='objeto entregue ao destinatário',
+                            'blue-text': evento.status.toLowerCase() === 'objeto encaminhado',
+                            'red-text': evento.status.toLowerCase() === 'objeto mal encaminhado',
+                            'amber-text': evento.status.toLowerCase() === 'objeto aguardando retirada no endereço indicado'
+                        }"></i></div>
+                </div>
+
+                <div class="col-12 my-2">{{evento.status}}</div>
+                <div class="col-12 my-2">{{evento.subStatus}}</div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<ng-template #contentRastreioInfo let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-title">
+            <div *ngIf="status === 'postado'">O que significa o status: “Objeto postado"?</div>
+            <div *ngIf="status === 'encaminhado'">O que significa o status: “Objeto encaminhado"?</div>
+            <div *ngIf="status === 'mal_encaminhado'">O que significa o status: “Objeto mal encaminhado"?</div>
+            <div *ngIf="status === 'aguardando_retirada'">O que significa o status: “Objeto aguardando retirada no endereço indicado"?</div>
+            <div *ngIf="status === 'entregue_ao_destinatario'">O que significa o status: “Objeto entregue ao destinatário"?</div>
+        </h4>
+        <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+
+        <div *ngIf="status === 'postado'">
+            <div class="content flow-text justificado my-2">
+                <p> Este status representa o exato momento em que sua encomenda foi postada em uma agência dos Correios.</p>
+                <p> Após a postagem a encomenda será transportada entre as unidades de distribuição até o centro de distribuição mais próximo de sua casa, quando então será entregue por um carteiro.</p>
+                <div class="rodape-content">
+                    <div class="divider"></div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="status === 'encaminhado'">
+            <div class="content flow-text justificado my-2">
+                <p> Significa que sua encomenda está sendo transportada entre unidades de distribuição dos correios até o centro de distribuição próximo de sua casa, quando então será entregue por um carteiro.</p>
+                <div class="rodape-content">
+                    <div class="divider"></div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="status === 'mal_encaminhado'">
+            <div class="content flow-text justificado my-2">
+                <p> Esse status é exibido quando por erro dos correios a encomenda foi enviada para uma outra rota, o procedimento agora será de corrigir esse erro e realizar a entrega da maneira mais rápida possível.</p>
+                <p>
+                </p>
+                <p>Orientamos que aguarde a correção no roteiro, e que se por um acaso não receber a encomenda no prazo combinado, entre em contato com a loja onde você realizou a sua compra e registre uma reclamação.</p>
+                <div class="rodape-content">
+                    <div class="divider"></div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="status === 'aguardando_retirada'">
+            <div class="content flow-text justificado my-2">
+                <p> Significa que para retirar sua encomenda você deve comparecer no endereço indicado.
+                </p>
+                <p> Isso pode ocorrer por vários motivos, entre eles:</p>
+                <ul class="browser-default">
+                    <li> Três tentativas de entrega foram realizadas no seu endereço.</li>
+                    <li> O endereço de entrega fica em uma área com restrição de entrega.</li>
+                    <li> A encomenda foi endereçada à uma agência dos correios ou para uma caixa postal.</li>
+                    <li> Endereço de entrega fica em Zona Rural ou Área Urbanizada sem entrega Postal.</li>
+                    <li> Endereço preenchido de forma incompleta ou incorreta na encomenda o que impede a localização do domicílio. </li>
+                </ul>
+                <p></p>
+                <p> Para retirá-lo, é preciso informar o código do objeto e apresentar documentação que comprove ser o destinatário ou pessoa por ele oficialmente autorizada.</p>
+                <div class="rodape-content">
+                    <div class="divider"></div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="status === 'entregue_ao_destinatario'">
+            <div class="content flow-text justificado my-2">
+                <p> Se você recebeu sua encomenda agora é só curtir suas compras!</p>
+                <p> Caso não tenha recebido e mesmo assim seu rastreamento esteja com este status, deve entrar em contato com a loja onde você realizou a compra e solicitar para que verifiquem quem recebeu a encomenda e onde foi entregue.</p>
+                <p>
+                </p>
+                <p> Peça também para confirmarem se o código de rastreamento confere e aproveite para confirmar o seu endereço de entrega.</p>
+                <p> Adicionalmente você pode entrar em contato com os correios através do telefone 0800 725 7282.</p>
+                <div class="rodape-content">
+                    <div class="divider"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Fechar</button>
+    </div>
+
+</ng-template>

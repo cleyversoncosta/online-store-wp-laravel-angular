@@ -1,0 +1,38 @@
+/*.ng-invalid.ng-touched:not(form) {
+  border: 1px solid #ea222e !important;
+}*/
+
+#newsletter {
+    width: 100%;
+    margin: 0 auto;
+    background: #fff;
+    position: relative;
+    border-radius: 4px;
+    z-index: 20;
+    p {
+        color: dimgray;
+    }
+    &:before {
+        display: block;
+        content: "";
+        height: 5px;
+        width: 100%;
+        top: -20px;
+        right: -20px;
+        left: -20px;
+        border-top-right-radius: 4px;
+        border-top-left-radius: 4px;
+        background: repeating-linear-gradient(-225deg, #4782ce, #4782ce 12px, #fff 12px, #fff 24px, #ea222e 24px, #ea222e 36px, #fff 36px, #fff 48px);
+    }
+    form {
+        padding: 24px 20px 20px;
+    }
+    .color {
+        color: hotpink;
+    }
+    .result {
+        line-height: 1.7rem;
+        padding-bottom: 20px;
+        color: #000;
+    }
+}

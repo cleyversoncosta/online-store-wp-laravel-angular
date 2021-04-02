@@ -1,0 +1,42 @@
+<button style="color: lightslategrey" class="btn" (click)="open(content)">
+  <i class="fa fa-comments fa-2x"></i>
+  <span style="font-size: large"
+    ><span class="d-none">&nbsp;Contatos</span></span
+  >
+</button>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Nossos Contatos</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="dropdown-header">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. At volutpat diam ut
+        venenatis tellus in metus vulputate. Dignissim enim sit amet venenatis
+        urna cursus eget. Neque laoreet suspendisse interdum consectetur libero.
+        Aliquam etiam erat velit scelerisque in. In eu mi bibendum neque egestas
+        congue quisque egestas. Metus vulputate eu scelerisque felis imperdiet
+        proin. Vitae congue mauris rhoncus aenean vel elit. Cras pulvinar mattis
+        nunc sed. Cursus in hac habitasse platea dictumst quisque sagittis purus
+        sit. Morbi tempus iaculis urna id volutpat lacus laoreet non. Tincidunt
+        arcu non sodales neque sodales ut etiam sit. Tristique senectus et netus
+        et malesuada fames ac turpis. Lacinia at quis risus sed vulputate odio
+        ut enim blandit. Vivamus at augue eget arcu. Sit amet consectetur
+        adipiscing elit duis. Quam id leo in vitae turpis massa sed elementum
+        tempus. Porttitor massa id neque aliquam vestibulum morbi blandit cursus
+        risus. Nam at lectus urna duis convallis convallis. Amet commodo nulla
+        facilisi nullam vehicula.
+      </p>
+    </div>
+  </div>
+</ng-template>

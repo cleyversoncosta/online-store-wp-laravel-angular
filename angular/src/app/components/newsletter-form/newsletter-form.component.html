@@ -1,0 +1,19 @@
+<div id="newsletter">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+        <div *ngIf="!showNewsletterTextoResp" class="form-row">
+            <div class="text-center mb-3" [innerHTML]="newsletterTexto" style="color:#003"></div>
+            <input type="text" id="nome" name="nome" placeholder="Digite seu nome" class="form-control" ngModel #nome="ngModel" required [class.is-invalid]="!nome.valid && nome.touched" />
+
+            <div *ngIf="!nome.valid && nome.touched" class="invalid-feedback">Nome é obrigatório</div>
+
+            <input type="email" id="email" name="email" placeholder="Digite seu e-mail" class="form-control mt-2" ngModel #email="ngModel" required email [class.is-invalid]="!email.valid && email.touched" />
+
+            <div *ngIf="!email.valid && email.touched" class="invalid-feedback">E-mail é obrigatório</div>
+
+            <input type="submit" value="Quero receber!" [disabled]="!f.valid" class="btn btn-primary btn-block mt-2" />
+        </div>
+    </form>
+    <div *ngIf="showNewsletterTextoResp">
+        <div class="result h5 text-center mx-auto" [innerHTML]="newsletterTextoResp"></div>
+    </div>
+</div>

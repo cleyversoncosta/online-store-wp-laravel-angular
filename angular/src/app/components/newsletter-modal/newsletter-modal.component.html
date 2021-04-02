@@ -1,0 +1,22 @@
+<ng-template #contentModalNewsletter let-modal>
+    <div class="container">
+        <div class="row">    
+            <div class="col-12 col-md-6">
+                <div class="row">
+                    <div class="d-sm-none">
+                        <button style="position: absolute; right: 15px;" type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"><span aria-hidden="true">&times;</span></button>
+                        <img class="img-fluid rounded-top" [src]="imagem_topo">
+                    </div>
+    
+                    <app-newsletter-form-modal></app-newsletter-form-modal>
+                </div>
+            </div>
+            <div class="col-6 d-none d-sm-block">
+                <div class="row">
+                    <button style="position: absolute; right: 10px;" type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"><span aria-hidden="true">&times;</span></button>
+                    <img class="img-fluid rounded" [src]="imagem_lado">
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

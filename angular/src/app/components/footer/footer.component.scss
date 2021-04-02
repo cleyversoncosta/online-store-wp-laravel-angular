@@ -1,0 +1,31 @@
+.list-unstyled li {
+    margin-bottom: 5px;
+}
+
+.stylish-color-dark {
+    background-color: #3e4551 !important;
+}
+
+.page-footer {
+    bottom: 0;
+    color: #fff;
+}
+
+.page-footer a {
+    color: #fff;
+}
+
+.page-footer a:hover {
+    text-decoration: none;
+    color: #ccc;;
+}
+
+.page-footer .footer-copyright {
+    overflow: hidden;
+    color: rgba(255,255,255,0.6);
+    background-color: rgba(0,0,0,0.2);
+}
+
+.page-footer ul, .page-footer p  {
+    font-weight: 100;
+}

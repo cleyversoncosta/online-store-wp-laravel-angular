@@ -1,0 +1,66 @@
+.payments {
+  width: 100%;
+  text-align: center;
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom:15px;
+}
+
+.payments div {
+  font-size: 14px;
+  font-weight: 700;
+  color: #333
+}
+
+.payments ul li.mastercard {
+  width: 29px;
+  height: 18px;
+  background: url('/assets/payments/mastercard.svg') no-repeat;
+  background-size: 100%
+}
+
+.payments ul li.visa {
+  width: 40px;
+  height: 15px;
+  /*margin: 0 10px;*/
+  background: url('/assets/payments/visa.svg') no-repeat;
+  background-size: 100%
+}
+
+.payments ul li.amex {
+  width: 30px;
+  height: 20px;
+  background: url('/assets/payments/amex.svg') no-repeat;
+  background-size: 100%
+}
+
+.payments ul li.hipercard {
+  width: 45px;
+  height: 18px;
+  /*margin: 0 10px;*/
+  background: url('/assets/payments/hipercard.svg') no-repeat;
+  background-size: 100%
+}
+
+.payments ul li.elo {
+  width: 35px;
+  height: 18px;
+  background: url('/assets/payments/elo.svg') no-repeat;
+  background-size: 100%
+}
+
+.payments ul li.diners {
+  width: 30px;
+  height: 20px;
+  /*margin: 0 10px;*/
+  background: url('/assets/payments/diners.svg') no-repeat;
+  background-size: 100%
+}
+
+.payments ul li.ticket {
+  width: 25px;
+  height: 18px;
+  background: url('/assets/payments/ticket.svg') no-repeat;
+  background-size: 100%
+}

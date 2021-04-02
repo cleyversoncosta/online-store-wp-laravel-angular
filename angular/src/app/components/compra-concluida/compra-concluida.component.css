@@ -1,0 +1,19 @@
+app-compra-concluida {
+    background-color: #faca6a;
+}
+
+@media (max-width: 670px) {
+    .block-grid,
+    .col {
+        min-width: 320px !important;
+        max-width: 100% !important;
+        display: block !important;
+    }
+    .block-grid,
+    .col {
+        width: 100% !important;
+    }
+    .col>div {
+        margin: 0 auto;
+    }
+}

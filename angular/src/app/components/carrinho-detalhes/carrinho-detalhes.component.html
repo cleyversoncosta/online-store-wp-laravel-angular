@@ -1,0 +1,182 @@
+<div class="bg-grey">
+    <div class="container">
+        <div class="row py-4">
+            <div class="col-md-8">
+                <div class="">
+                    <!-- MBILE -->
+                    <div class="col-md-12 bg-white rounded shadow-sm mb-4 d-block d-md-none ">
+
+                        <div class="table-responsive pt-3">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th colspan="3" scope="col" class="border-0 bg-light">
+                                            <div class="p-1 text-uppercase">Produtos</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="produto">
+                                    <tr *ngFor="let produto of produtosCarrinho, let i = index">
+                                        <td class="cursor-pointer" style="width: 100px;" [routerLink]="['/produto', produto.id, produto.slug]">
+                                            <img src="{{produto.images[0].src}}" alt="" class="img-fluid rounded shadow-sm">
+                                        </td>
+                                        <td class="box-info text-left align-middle">
+                                            <div class="cursor-pointer">
+                                                <span [routerLink]="['/produto', produto.id, produto.slug]">
+                                                <h5 class="titulo mb-0 align-middle">{{produto.name | uppercase}}</h5>
+                                                <div class="subtitulo">{{produto.subtitle | uppercase}}</div>
+
+                                                <ul class="list-inline mt-1 mb-2">
+                                                    <li class="list-inline-item" *ngIf="produto.new_collection">
+                                                        <app-tag-lancamento-dois></app-tag-lancamento-dois>
+                                                    </li>
+                                                    <li class="list-inline-item" *ngIf="produto.on_sale">
+                                                        <app-tag-sale-dois [percDesconto]="(100 -((produto.price * 100) / produto.regular_price)) / 100 | percent"></app-tag-sale-dois>
+                                                    </li>
+                                                </ul>
+                                                </span>
+
+                                                <div class="float-left" style="width:80%" [routerLink]="['/produto', produto.id, produto.slug]">
+
+                                                    <div class="clearfix">
+                                                        <div class="small float-left pr-2" *ngIf="produto.on_sale">
+                                                          <s class="p">{{produto.regular_price | currency: "BRL"}}</s></div>
+                                                        <div class="small float-left">{{ produto.sale_price | currency: "BRL" }}</div>
+                                                      </div>
+                        
+                                                      <div class="small" *ngIf="!produto.on_sale">{{ produto.price | currency: "BRL" }}</div>
+                                                      <div class="preco-atual">ou <b>{{ this.maxParcelas }}x {{produto.price / this.maxParcelas | currency: "BRL":true}}</b></div>
+                                                                                              
+                                                </div>
+                                                <div class="float-right" style="width:20%">
+                                                    <button class="btn btn-light" (click)="excluirProdutoDoCarrinho(i)"><span class="cursor-pointer"><i class="fa fa-trash"></i></span></button>
+                                                </div> 
+                                            </div>
+
+                                            
+
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- End -->
+                    </div>
+
+
+
+                    <!-- DESKTOP -->
+                    <div class="col-12 bg-white rounded shadow-sm d-none d-md-block ">
+                        <div class="table-responsive pt-3">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 50%;" colspan="2" scope="col" class="border-0 bg-light">
+                                            <div class="p-1 text-uppercase">Produtos</div>
+                                        </th>
+                                        <th scope="col" class="border-0 bg-light">
+                                            <div class="py-1 text-uppercase text-left">Preço</div>
+                                        </th>
+                                        <th scope="col" class="border-0 bg-light">
+
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="produto">
+                                    <tr *ngFor="let produto of produtosCarrinho, let i = index">
+                                        <td class="cursor-pointer" style="width: 70px;" [routerLink]="['/produto', produto.id, produto.slug]">
+                                            <img src="{{produto.images[0].src}}" alt="" class="img-fluid rounded shadow-sm">
+                                        </td>
+                                        <td class="text-left align-middle cursor-pointer box-info" [routerLink]="['/produto', produto.id, produto.slug]">
+                                            <h5 class="mb-0 titulo align-middle">{{produto.name | uppercase}}</h5>
+                                            <div class="subtitulo mb-2">{{produto.subtitle | uppercase}}</div>
+
+                                            <ul class="list-inline mt-1 mb-2">
+                                                <li class="list-inline-item" *ngIf="produto.new_collection">
+                                                    <app-tag-lancamento-dois></app-tag-lancamento-dois>
+                                                </li>
+                                                <li class="list-inline-item" *ngIf="produto.on_sale">
+                                                    <app-tag-sale-dois [percDesconto]="(100 - (produto.sale_price * 100) / produto.regular_price) / 100 | percent">
+                                                    </app-tag-sale-dois>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td class="text-left align-middle box-info">
+   
+                                            <div class="clearfix">
+                                                <div class="small float-left pr-2" *ngIf="produto.on_sale">
+                                                  <s class="p">{{produto.regular_price | currency: "BRL"}}</s></div>
+                                                <div class="small float-left">{{ produto.sale_price | currency: "BRL" }}</div>
+                                              </div>
+                
+                                              <div class="small" *ngIf="!produto.on_sale">{{ produto.price | currency: "BRL" }}</div>
+                                              <div class="preco-atual">ou <b>{{ this.maxParcelas }}x {{produto.price / this.maxParcelas | currency: "BRL":true}}</b></div>
+                                      
+                                        </td>
+                                        <td class="align-middle"><button class="btn btn-default" (click)="excluirProdutoDoCarrinho(i)"><span class="cursor-pointer medium"><i class="fa fa-trash"></i></span></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- End -->
+
+                <div class="mt-4 d-none d-md-block">
+                    <app-carrinho-shipping-billing [valorCupomDesconto]="valorCupomDesconto" [valorAPagar]="valorAPagar" [produtosCarrinho]="produtosCarrinho"></app-carrinho-shipping-billing>
+                </div>
+            </div>
+
+
+            <div class="col-lg-4">
+                <div class="">
+                    <div class="col-12 bg-white rounded shadow-sm">
+                        <div class="pt-3" *ngIf="cupomHabilitado == '1'">
+                            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Use seu cupom</div>
+                            <div class="pt-3 pb-1">
+                                <p class="font-italic mb-4 text-center">Se você tem um cupom, insira no campo abaixo e clique em "Validar"</p>
+                                <div class="input-group mb-4 border rounded-pill p-2">
+                                    <input placeholder="Digite seu cupom" [(ngModel)]="cupomUsuario" #cupomUsuarioInput aria-describedby="button-addon3" class="form-control border-0">
+                                    <div class="input-group-append border-0">
+                                        <button id="button-addon3" type="button" (click)="aplicarCupom(cupomUsuarioInput.value)" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Validar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 bg-white rounded shadow-sm mt-4">
+                        <div class="pt-3">
+                            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Detalhes do pedido</div>
+                            <div class="py-4">
+                                <p class="font-italic mb-4 text-center">Frete e custos adicionais são apresetados abaixo quando existente.</p>
+                                <ul class="list-unstyled mb-4">
+                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Valor do pedido </strong><strong>{{valorDoPedido | currency:'BRL'}}</strong></li>
+                                    <li *ngIf="possuiCupomValido" class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Cupom ({{this.cupomValido}}) <br> {{cupomDesconto}}% de desconto</strong><strong>-{{valorCupomDesconto | currency:'BRL'}}</strong></li>
+
+                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Valor a pagar</strong>
+                                        <h5 class="font-weight-bold">{{valorAPagar | currency:'BRL'}}</h5>
+                                    </li>
+                                </ul>
+                                <div class="alert alert-danger text-center" *ngIf="valorDoPedido == 0">Você não possui nenhum produto no carrinho.</div>
+
+                                <button type="submit" [disabled]="valorDoPedido === 0" class="btn btn-dark rounded-pill py-2 btn-block d-md-none" (click)="openModalForm(contentForm)">Prosseguir com  Pagamento</button>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #contentForm let-modal>
+    <div class="modal-header">
+        <h5 class="font-weight-bold"><span class="font-weight-light">A pagar </span>{{valorAPagar | currency:'BRL'}}</h5>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()"><span aria-hidden="true">&times;</span></button>
+    </div>
+    <div class="modal-body" style="background-color: #f1f1f1;">
+        <app-carrinho-shipping-billing [valorCupomDesconto]="valorCupomDesconto" [valorAPagar]="valorAPagar" [produtosCarrinho]="produtosCarrinho"></app-carrinho-shipping-billing>
+    </div>
+</ng-template>

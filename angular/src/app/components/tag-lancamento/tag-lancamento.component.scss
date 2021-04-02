@@ -1,0 +1,57 @@
+.lancamento {
+    /*position: absolute;*/
+    display: inline-block;
+    background: limegreen;
+    color: green;
+    height: 2rem;
+    width: 2rem;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 2rem;
+    font-size: 13px;
+    margin: 0;
+    -webkit-transform: rotate(-20deg);
+            transform: rotate(-20deg);
+    -webkit-animation: beat 1s ease infinite alternate;
+            animation: beat 1s ease infinite alternate;
+    /*left: 10px;*/
+  }
+  .lancamento:before, .lancamento:after {
+    content: "";
+    position: absolute;
+    background: inherit;
+    height: inherit;
+    width: inherit;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    -webkit-transform: rotate(30deg);
+            transform: rotate(30deg);
+  }
+  .lancamento:after {
+    -webkit-transform: rotate(60deg);
+            transform: rotate(60deg);
+  }
+  
+  @-webkit-keyframes beat {
+    from {
+      -webkit-transform: rotate(-20deg) scale(1);
+              transform: rotate(-20deg) scale(1);
+    }
+    to {
+      -webkit-transform: rotate(-20deg) scale(1.1);
+              transform: rotate(-20deg) scale(1.1);
+    }
+  }
+  
+  @keyframes beat {
+    from {
+      -webkit-transform: rotate(-20deg) scale(1);
+              transform: rotate(-20deg) scale(1);
+    }
+    to {
+      -webkit-transform: rotate(-20deg) scale(1.1);
+              transform: rotate(-20deg) scale(1.1);
+    }
+  }
+  
