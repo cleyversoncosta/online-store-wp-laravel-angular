@@ -56,7 +56,7 @@ INSERT INTO `tbl_loja_settings` (`id`, `tipo`, `valor`, `ativo`) VALUES
 	(12, 'newsletter-modal-trigger', 'scroll-perc', 1),
 	(13, 'newsletter-modal-trigger-value', '10', 1),
 	(14, 'newsletter-modal-texto', 'Cadastre seu e-mail e receba nossas promoções e novidades!', 1),
-	(15, 'newsletter-modal-texto-resp', 'bbb', 1),
+	(15, 'newsletter-modal-texto-resp', 'Obrigado!', 1),
 	(16, 'show-top-bar', '1', 1),
 	(17, 'mautic-segmento-nw-f', NULL, 0),
 	(18, 'mautic-segmento-nw-m', NULL, 0),
