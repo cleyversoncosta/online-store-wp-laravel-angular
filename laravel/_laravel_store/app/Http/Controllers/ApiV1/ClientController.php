@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 class ClientController extends Controller
 {
 
-
     function show($id)
     {
 
@@ -16,8 +15,6 @@ class ClientController extends Controller
 
         return response()->json($res);
     }
-
-
 
     function create(Request $request)
     {

@@ -11,6 +11,7 @@ class ProductController extends Controller
 	
 	public function index()
 	{
+
 		$produtos = Woocommerce::get('products', ['status' => 'publish']);
 
 		foreach ($produtos as $key => $produto) {

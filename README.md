@@ -12,6 +12,7 @@ Abaixo descrevo brevemente as ferramentas e tecnologias utilizadas
 2. mautic/api-library - para criação de lista para email marketing
 3. pagarme/pagarme-php - integração com gateway de pagamento Pagar.me
 4. pixelpeter/laravel5-woocommerce-api-client - wrapper do woocommerce para comunicação REST
+5. jgrossi/corcel - wrapper para comunicação com o wordpress direto via Eloquent
 
 ### Angular 9
 Na ocasião do desenvolvimento desta Loja Online, a última release disponível era o Angular 9. Nenhum pacote em especial foi adicionado.
@@ -21,6 +22,10 @@ Foi utilizao a API do woocommerce e toda estrtutura de loja online que ele ofere
 
 ### Ordem de comunicação
 
-Request: Usuário >> Angular (front-end) >> API Laravel (back-end) >> API Woocommerce (back-end)
+**Request:** Usuário >> Angular (front-end) >> API Laravel (back-end) >> API Woocommerce (back-end)
 
-Response: Woocommerce >> Laravel >> Angular >> Usuário
+**Response:** Woocommerce >> Laravel >> Angular >> Usuário
+
+### Imagens Demonstração
+
+[Loja Online]()
