@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `tbl_header_carousel` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela laravel_store.tbl_header_carousel: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela laravel_store.tbl_header_carousel: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `tbl_header_carousel` DISABLE KEYS */;
 INSERT INTO `tbl_header_carousel` (`id`, `src`, `tipo`, `ativo`) VALUES
 	(1, 'http://127.0.0.1:8000/images/header-carousel/desktop/2.jpg', 'desktop', 1),
@@ -56,7 +56,7 @@ INSERT INTO `tbl_loja_settings` (`id`, `tipo`, `valor`, `ativo`) VALUES
 	(12, 'newsletter-modal-trigger', 'scroll-perc', 1),
 	(13, 'newsletter-modal-trigger-value', '10', 1),
 	(14, 'newsletter-modal-texto', 'Cadastre seu e-mail e receba nossas promoções e novidades!', 1),
-	(15, 'newsletter-modal-texto-resp', 'Obrigado!', 1),
+	(15, 'newsletter-modal-texto-resp', NULL, 1),
 	(16, 'show-top-bar', '1', 1),
 	(17, 'mautic-segmento-nw-f', NULL, 0),
 	(18, 'mautic-segmento-nw-m', NULL, 0),
