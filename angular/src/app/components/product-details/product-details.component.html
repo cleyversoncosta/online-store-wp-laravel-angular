@@ -1,0 +1,157 @@
+<div class="container pt-3">
+  <div class="row product">
+    <div class="col-md-4 text-center">
+
+      <ngb-carousel [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
+        <ng-template ngbSlide *ngFor="let image of images, index as i">
+
+          <div class="picsum-img-wrapper">
+
+            <ul class="tags list-inline mt-2">
+              <li class="list-inline-item" *ngIf="product.new_collection">
+                <app-tag-new-two></app-tag-new-two>
+              </li>
+              <li class="list-inline-item"*ngIf="product.on_sale"><app-tag-sale-two [percDesconto]="(100 - (product.sale_price * 100) / product.regular_price) / 100 | percent"></app-tag-sale-two></li>
+            </ul>
+
+            <img [src]="image" class="rounded" width="100%">
+          </div>
+          <div class="carousel-caption">
+            <h3>&nbsp;</h3>
+            <p>&nbsp;</p>
+          </div>
+
+        </ng-template>
+      </ngb-carousel>
+
+    </div>
+
+    <div class="col-md-8">
+      <div class=" box-info d-block d-md-none mt-2 text-center pb-4">
+        <h1 class="titulo">{{product.name | uppercase}}</h1>
+        <div class="subtitulo">{{product.subtitle | uppercase}}</div>
+
+        <div class="clearfix row mt-2" *ngIf="product.on_sale">
+          <div class="col-6 text-right"><s>{{product.regular_price | currency:'BRL'}}</s></div>
+          <div class="col-6 text-left">{{product.sale_price | currency:'BRL'}}</div>
+        </div>
+
+        <div class="clearfix mt-2 text-center" *ngIf="!product.on_sale">
+          {{product.regular_price | currency:'BRL'}}
+        </div>
+
+        <div class="preco-atual mb-3">ou <b>{{this.maxInstallments}}x {{product.price / this.maxInstallments | currency:'BRL':true}}</b></div>
+
+        <button *ngIf="product.stock_quantity > 0" type="button" class="btn btn-outline-info" (click)="addToCart(product)">Adicionar ao cart</button>&nbsp;
+        <button *ngIf="product.stock_quantity > 0" type="button" class="btn btn-outline-primary" (click)="buyNow(product)">Comprar agora</button>
+
+        <button *ngIf="product.stock_quantity <= 0" type="button" class="btn btn-outline-dark d-inline">Fora de estoque</button>
+      </div>
+
+      <div class="d-none d-md-block box-info pb-4">
+        <h1 class="h2">{{product.name | uppercase}}</h1>
+        <div class="subtitulo mb-2">{{product.subtitle | uppercase}}</div>
+
+        <div class="clearfix mt-2" *ngIf="product.on_sale">
+          <div class="pr-3 float-left"><s>{{product.regular_price | currency:'BRL'}}</s></div>
+          <div class="float-left">{{product.sale_price | currency:'BRL'}}</div>
+        </div>
+
+        <div class="clearfix mt-2" *ngIf="!product.on_sale">
+          {{product.price | currency:'BRL'}}
+        </div>
+
+        <div class="preco-atual mb-3">ou <b>{{this.maxInstallments}}x {{product.price / this.maxInstallments | currency:'BRL':true}}</b></div>
+
+        <button *ngIf="product.stock_quantity > 0" type="button" class="btn btn-outline-info" (click)="addToCart(product)">Adicionar ao cart</button>&nbsp;
+        <button *ngIf="product.stock_quantity > 0" type="button" class="btn btn-outline-primary" (click)="buyNow(product)">Comprar agora</button>
+
+        <button *ngIf="product.stock_quantity <= 0" type="button" class="btn btn-outline-dark d-inline">Fora de estoque</button>
+      </div>
+
+
+      <ngb-tabset>
+        <ngb-tab title="Descrição">
+          <ng-template ngbTabContent class="p-2">
+            <div class="p-3">
+
+              <div [innerHTML]="product.description"></div>
+
+              <div *ngIf="images[1] !== 'undefined'" class="text-center px-4 col-md-6 offset-md-3"><img [src]="images[1]" class="mb-3 rounded img-fluid" height="auto" /></div>
+
+              <p>Os fornecedores da NOME-DA-LOJA investem na qualidade dos seus products desde a concepção da peça, na escolha
+                da matéria-prima até detalhes de finalização. Na fabricação de joias é utilizada a mais moderna
+                tecnologia de eletrodeposição
+                de metais. O controle desse processo é feito com laboratórios e maquinários de última geração.</p>
+
+              <p>Só um detalhe: as pedras naturais podem apresentar inclusões e variações de cores. Tais características
+                as tornam únicas e belas.</p>
+
+              <p>Todas as nossas peças são hipoalergênicas, 100% livres de níquel e chumbo em sua composição.</p>
+
+            </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Envio e Devolução">
+          <ng-template ngbTabContent>
+            <div class="p-3">
+              <p class="color-hotpink"><strong>INFORMAÇÕES GERAIS DE ENVIO</strong></p>
+
+              <p><b>ACABEI DE EFETUAR A MINHA COMPRA, QUANTO TEMPO DEMORA PARA SER ENVIADO?</b></p>
+              <p>O pedido será processado (separado, embalado e enviado) em até 2 (dois) days úteis após a confirmação
+                do pagamento junto as instituições financeiras.</p>
+
+              <p><b>QUAL O PRAZO DE ENTREGA DO MEU PRODUCT?</b></p>
+              <p>O prazo de entrega varia dependendo de cada região do Brasil. Você pode acompanhar o rastreio do seu
+                product através da nossa página <a routerLink="/product-tracking">Acompanhar Product</a>.</p>
+
+              <p>Para mais informações, por favor visite nossa página <a routerLink="/shipping-policy">Política de
+                  Envio</a>.</p>
+
+              <p class="mt-3 color-hotpink"><strong>INFORMAÇÕES GERAIS DE RETORNO</strong></p>
+
+              <p>O código do consumidor assegura o direito de troca do product no caso de defeito ou desistência desde
+                que ocorra em até 7 days após a entrega do mesmo.</p>
+
+              <p>Para trocas por defeito, a NOME-DA-LOJA arca com as despesas de recolhimento/postagem do product. Para trocas
+                por opção ou arrependimento, a NOME-DA-LOJA não arca com as despesas de recolhimento/postagem do product
+                (incluindo embalagem).</p>
+
+              <p>Para mais informações, por favor visite nossa página <a routerLink="/return-policy">Política de
+                  Retorno</a>.</p>
+            </div>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+  </div>
+</div>
+
+<app-products-list></app-products-list>
+
+<div class="d-block d-md-none sticky-bottom">
+  <nav class="navbar fixed-bottom bg-light">
+
+    <div style="width: 55%;">
+
+        <div class="clearfix" *ngIf="product.on_sale">
+            <div class="small float-left pr-2"><s class="p">{{product.regular_price | currency: "BRL"}}</s></div>
+            <div class="small float-left">{{ product.sale_price | currency: "BRL" }}</div>
+        </div>
+
+          <div *ngIf="!product.on_sale" class="small">{{ product.price | currency: "BRL" }}</div>
+
+        <div class="preco-atual"> ou <b>{{ this.maxInstallments }}x {{ product.price / this.maxInstallments | currency: "BRL":true }}</b></div>
+    </div>
+
+    <div style="width: 45%;" *ngIf="product.stock_quantity > 0">
+      <button style="height: 38px;" type="button" class="btn btn-outline-info float-rigt" (click)="addToCart(product)"><i class="fa fa-shopping-basket" aria-hidden="true"></i></button>
+      <button type="button" class="btn btn-outline-primary float-right ml-2" (click)="buyNow(product)">Comprar</button>
+    </div>
+
+    <div style="width: 45%;" *ngIf="product.stock_quantity <= 0">
+      <button type="button" class="btn btn-outline-dark d-inline">Fora de estoque</button>
+    </div>
+
+  </nav>
+</div>

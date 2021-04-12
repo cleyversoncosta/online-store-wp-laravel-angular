@@ -1,4 +1,4 @@
-import { LojaSettingsService } from './../../services/loja-settings.service';
+import { StoreSettingsService } from '../../services/store-settings.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,10 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private lojaSettingsService: LojaSettingsService) { }
+  constructor(private storeSettingsService: StoreSettingsService) { }
 
   ngOnInit(): void {
-    
+
   }
-  
+
 }

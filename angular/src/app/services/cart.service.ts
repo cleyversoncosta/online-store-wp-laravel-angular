@@ -15,11 +15,11 @@ import {
   NgxSpinnerService
 } from 'ngx-spinner';
 import {
-  ClienteService
-} from './cliente.service';
+  ClientService
+} from './client.service';
 import {
-  LojaSettingsService
-} from './loja-settings.service';
+  StoreSettingsService
+} from './store-settings.service';
 import {
   SettingsService
 } from './settings.service';
@@ -34,109 +34,109 @@ import {
 })
 export class CartService {
 
-  carrinho: any = []
+  cart: any = []
 
-  private itemsCarrinho: BehaviorSubject < any > ;
-  private valorDoPedido: BehaviorSubject < any > ;
+  private cartItems: BehaviorSubject < any > ;
+  private orderTotals: BehaviorSubject < any > ;
 
   constructor(
     private localStorage: LocalStorage,
     private http: HttpClient,
     private settingsService: SettingsService,
-    private clienteService: ClienteService,
+    private clientService: ClientService,
     private router: Router,
-    private lojaSettingsService: LojaSettingsService,
+    private storeSettingsService: StoreSettingsService,
     private spinner: NgxSpinnerService
   ) {
 
-    this.itemsCarrinho = new BehaviorSubject < any > (null)
-    this.valorDoPedido = new BehaviorSubject < any > (null)
+    this.cartItems = new BehaviorSubject < any > (null)
+    this.orderTotals = new BehaviorSubject < any > (null)
 
   }
 
 
-  adicionarAoCarrinho(produto) {
+  addToCart(product) {
     return new Promise((resolve, reject) => {
-      this.localStorage.getItem('carrinho').subscribe((produtos: any[]) => {
+      this.localStorage.getItem('cart').subscribe((products: any[]) => {
 
-        if (produtos === null) produtos = []
+        if (products === null) products = []
 
-        produtos.push(produto)
-        this.localStorage.setItem('carrinho', produtos).subscribe(() => {
-          
-          this.itemsCarrinho.next(produtos)
+        products.push(product)
+        this.localStorage.setItem('cart', products).subscribe(() => {
 
-          this.atualizaValorDoPedido(produtos)
-                    
-          resolve(produtos)
+          this.cartItems.next(products)
+
+          this.updateOrderTotals(products)
+
+          resolve(products)
         })
       })
     })
   }
 
-  atualizaValorDoPedido(produtos) {
-    let valorDoPedido = 0
-    produtos.forEach(item => {
-      valorDoPedido += parseFloat(item.price)
+  updateOrderTotals(products) {
+    let orderTotals = 0
+    products.forEach(item => {
+      orderTotals += parseFloat(item.price)
     })
-    this.valorDoPedido.next(valorDoPedido)
+    this.orderTotals.next(orderTotals)
   }
 
-  obterProdutosDoCarrinho(): Observable < any > {
-    this.localStorage.getItem('carrinho').subscribe(produtos => {
-      this.itemsCarrinho.next(produtos)
+  getCartProducts(): Observable < any > {
+    this.localStorage.getItem('cart').subscribe(products => {
+      this.cartItems.next(products)
     })
-    return this.itemsCarrinho.asObservable();
+    return this.cartItems.asObservable();
   }
 
-  obterValorDoPedido(): Observable < any > {
-    this.localStorage.getItem('carrinho').subscribe((produtos: any[]) => {
-      let valorDoPedido = 0
-      if (produtos !== null) {
-        produtos.forEach(item => {
-          valorDoPedido += parseFloat(item.price)
+  getOrderTotals(): Observable < any > {
+    this.localStorage.getItem('cart').subscribe((products: any[]) => {
+      let orderTotals = 0
+      if (products !== null) {
+        products.forEach(item => {
+          orderTotals += parseFloat(item.price)
         })
       }
 
-      this.valorDoPedido.next(valorDoPedido)
+      this.orderTotals.next(orderTotals)
     })
-    return this.valorDoPedido.asObservable();
+    return this.orderTotals.asObservable();
   }
 
 
-  obterQuantidadeDeItemsNoCarrinho(): Observable < any > {
-    return this.itemsCarrinho.asObservable();
+  getAmountCartItems(): Observable < any > {
+    return this.cartItems.asObservable();
   }
 
-  excluirProdutoDoCarrinho(index) {
+  deleteFromCart(index) {
     return new Promise((resolve, reject) => {
-      this.localStorage.getItem('carrinho').subscribe((produtos: any[]) => {
-        produtos.splice(index, 1)
+      this.localStorage.getItem('cart').subscribe((products: any[]) => {
+        products.splice(index, 1)
 
-        this.itemsCarrinho.next(produtos)
+        this.cartItems.next(products)
 
-        let valorDoPedido = 0
-        produtos.forEach(item => {
-          valorDoPedido += parseFloat(item.price)
+        let orderTotals = 0
+        products.forEach(item => {
+          orderTotals += parseFloat(item.price)
         })
-        this.valorDoPedido.next(valorDoPedido)        
+        this.orderTotals.next(orderTotals)
 
-        this.localStorage.setItem('carrinho', produtos).subscribe(() => {
-          resolve()
+        this.localStorage.setItem('cart', products).subscribe(() => {
+          //resolve()
         })
       })
     })
   }
 
-  esvaziarCarrinho() {
+  emptyCart() {
     return new Promise((resolve, reject) => {
       this.localStorage.clear().subscribe(res => {
-        
-        this.valorDoPedido.next(0)
 
-        this.itemsCarrinho.next([])
-        resolve()
-      })        
+        this.orderTotals.next(0)
+
+        this.cartItems.next([])
+        //resolve()
+      })
     })
   }
 }

@@ -1,0 +1,50 @@
+<div class="bg-grey">
+  <div class="container pt-3">
+    <div class="row text-center">
+      <div class="col-6 col-md-3 p-2" *ngFor="let product of products">
+        <div class="product cursor-pointer">
+          <div (click)="showLoading(product.id)" [routerLink]="['/product', product.id, product.slug]">
+
+              <ul class="list-inline mt-2">
+                <li class="list-inline-item" *ngIf="product.new_collection">
+                  <app-tag-new-two></app-tag-new-two>
+                </li>
+                <li class="list-inline-item" *ngIf="product.on_sale">
+                  <app-tag-sale-two [percDesconto]="(100 - (product.sale_price * 100) / product.regular_price) / 100 | percent"></app-tag-sale-two>
+                </li>
+              </ul>
+
+            <img class="img-fluid rounded" height="auto" [src]="product.image_default" (mouseover)="product.image_default = product.images[1].src" (mouseout)="product.image_default = product.images[0].src" />
+          </div>
+
+          <div class="box-info" (click)="showLoading(product.id)" [routerLink]="['/product', product.id, product.slug]">
+            <h2 class="titulo">{{ product.name | uppercase }}</h2>
+            <div class="subtitulo mb-2">{{ product.subtitle | uppercase }}</div>
+
+            <div class="clearfix">
+              <div class="small float-left pr-2" *ngIf="product.on_sale">
+                <s class="p">{{product.regular_price | currency: "BRL"}}</s></div>
+              <div class="small float-left">{{ product.price | currency: "BRL" }}</div>
+            </div>
+            <div class="preco-atual">ou <b>{{ this.maxInstallments }}x {{ product.price / this.maxInstallments | currency: "BRL":true }}</b></div>
+          </div>
+
+          <div *ngIf="product.stock_quantity > 0" class="box-buttons text-center">
+            <button type="button" class="btn btn-sm btn-outline-primary d-inline d-sm-none"
+              (click)="buyNow(product)">
+              Comprar</button>&nbsp;
+            <button type="button" class="btn btn-sm btn-outline-primary d-none d-sm-inline"
+              (click)="buyNow(product)">
+              Comprar agora</button>&nbsp;
+            <button type="button" class="btn btn-outline-info" (click)="addToCart(product)">
+              <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div *ngIf="product.stock_quantity <= 0" class="box-buttons text-center">
+            <button type="button" class="btn btn-sm btn-outline-dark d-inline">Fora de estoque</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

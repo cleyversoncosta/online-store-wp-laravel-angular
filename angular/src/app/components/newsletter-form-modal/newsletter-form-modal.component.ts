@@ -1,6 +1,6 @@
 import { NewsletterFormService } from '../../services/newsletter-form.service';
 import { Component, OnInit } from '@angular/core';
-import { LojaSettingsService } from './../../services/loja-settings.service';
+import { StoreSettingsService } from '../../services/store-settings.service';
 
 import { NgxSpinnerService } from "ngx-spinner";
 
@@ -16,20 +16,20 @@ export class NewsletterFormModalComponent implements OnInit {
   newsletterTextoResp: any = '';
 
   constructor(
-      private newsletterFormService: NewsletterFormService, 
-      private lojaSettingsService: LojaSettingsService,
+      private newsletterFormService: NewsletterFormService,
+      private storeSettingsService: StoreSettingsService,
       private spinner: NgxSpinnerService
-      ) { 
+      ) {
 
   }
 
   ngOnInit(): void {
 
-    this.newsletterTexto = this.lojaSettingsService.getNewsletterModalTexto();
+    this.newsletterTexto = this.storeSettingsService.getNewsletterModalTexto();
 
-    this.newsletterTextoResp = this.lojaSettingsService.getNewsletterModalTextoResp();
+    this.newsletterTextoResp = this.storeSettingsService.getNewsletterModalTextoResp();
   }
-  
+
   onSubmit(form) {
     this.spinner.show();
     this.newsletterFormService.addNewsletterModalForm(form.value).then(data => {
@@ -37,5 +37,5 @@ export class NewsletterFormModalComponent implements OnInit {
 
       this.spinner.hide();
     });
-  } 
+  }
 }

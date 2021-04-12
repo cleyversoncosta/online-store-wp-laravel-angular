@@ -1,5 +1,5 @@
 import { NewsletterFormService } from './../../services/newsletter-form.service'
-import { LojaSettingsService } from './../../services/loja-settings.service'
+import { StoreSettingsService } from '../../services/store-settings.service'
 import { Component, OnInit } from '@angular/core'
 import { NgxSpinnerService } from "ngx-spinner";
 @Component({
@@ -14,15 +14,15 @@ export class NewsletterFormComponent implements OnInit {
   newsletterTextoResp: any = ''
 
   constructor(
-    private newsletterFormService: NewsletterFormService, 
-    private lojaSettingsService: LojaSettingsService,
+    private newsletterFormService: NewsletterFormService,
+    private storeSettingsService: StoreSettingsService,
     private spinner: NgxSpinnerService
     ) { }
 
   ngOnInit(): void {
-    this.newsletterTexto = this.lojaSettingsService.getNewsletterTexto();
+    this.newsletterTexto = this.storeSettingsService.getNewsletterTexto();
 
-    this.newsletterTextoResp = this.lojaSettingsService.getNewsletterTextoResp();
+    this.newsletterTextoResp = this.storeSettingsService.getNewsletterTextoResp();
   }
 
   onSubmit(form) {
@@ -31,5 +31,5 @@ export class NewsletterFormComponent implements OnInit {
       this.showNewsletterTextoResp = true
       this.spinner.hide();
     })
-  } 
+  }
 }

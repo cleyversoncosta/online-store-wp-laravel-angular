@@ -46,8 +46,8 @@ const cookieConfig:NgcCookieConsentConfig = {
   "type": "info"
 };
 
-export function init_app(lojaSettingsService: LojaSettingsService) {
-  return () => lojaSettingsService.setLojaSettings()
+export function init_app(storeSettingsService: StoreSettingsService) {
+  return () => storeSettingsService.setLojaSettings()
 }
 
 // LOCALE
@@ -60,46 +60,46 @@ import { BaseUrlPipe } from './pipes/base-url.pipe'
 
 // SERVICES
 import { SettingsService } from './services/settings.service'
-import { ProdutosService } from './services/produtos.service'
+import { ProductsService } from './services/products.service'
 import { HeaderCarouselService } from './components/header-carousel/header-carousel.service'
-import { LojaSettingsService } from './services/loja-settings.service'
+import { StoreSettingsService } from './services/store-settings.service'
 
 
 // COMPONENTS
 import { HeaderComponent } from './components/header/header.component'
 import { FooterComponent } from './components/footer/footer.component'
-import { SobreNosComponent } from './components/sobre-nos/sobre-nos.component'
-import { PoliticaDeEnvioComponent } from './components/politica-de-envio/politica-de-envio.component'
-import { PoliticaDeRetornoComponent } from './components/politica-de-retorno/politica-de-retorno.component'
-import { PoliticaDePrivacidadeComponent } from './components/politica-de-privacidade/politica-de-privacidade.component'
-import { TermosDeServicoComponent } from './components/termos-de-servico/termos-de-servico.component'
-import { AcompanharProdutoComponent } from './components/acompanhar-produto/acompanhar-produto.component'
-import { PerguntasFrequentesComponent } from './components/perguntas-frequentes/perguntas-frequentes.component'
+import { AboutUsComponent } from './components/about-us/about-us.component'
+import { ShippingPolicyComponent } from './components/shipping-policy/shipping-policy.component'
+import { ReturnPolicyComponent } from './components/return-policy/return-policy.component'
+import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component'
+import { TermsOfServiceComponent } from './components/terms-of-service/terms-of-service.component'
+import { ProductTrackingComponent } from './components/product-tracking/product-tracking.component'
+import { FAQComponent } from './components/faq/faq.component'
 import { HeaderCarouselComponent } from './components/header-carousel/header-carousel.component'
 import { HomeComponent } from './components/home/home.component'
-import { NaoEncontradoComponent } from './components/nao-encontrado/nao-encontrado.component'
-import { ProdutoDetalhesComponent } from './components/produto-detalhes/produto-detalhes.component'
+import { NotFoundComponent } from './components/not-found/not-found.component'
+import { ProductDetailsComponent } from './components/product-details/product-details.component'
 import { FooterSocialIconsComponent } from './components/footer-social-icons/footer-social-icons.component'
-import { ProdutosListaComponent } from './components/produtos-lista/produtos-lista.component'
-import { HeaderCarrinhoComponent } from './components/header-carrinho/header-carrinho.component'
-import { CarrinhoDetalhesComponent } from './components/carrinho-detalhes/carrinho-detalhes.component'
-import { FaixaMiniComponent } from './components/faixa-mini/faixa-mini.component'
-import { HeaderContatoComponent } from './components/header-contato/header-contato.component'
+import { ProductsListComponent } from './components/products-list/products-list.component'
+import { HeaderCartComponent } from './components/header-cart/header-cart.component'
+import { MiniBannerComponent } from './components/mini-banner/mini-banner.component'
+import { HeaderContactComponent } from './components/header-contact/header-contact.component'
 import { HeaderTopBarComponent } from './components/header-top-bar/header-top-bar.component'
-import { FaleConoscoComponent } from './components/fale-conosco/fale-conosco.component'
+import { ContactUsComponent } from './components/contact-us/contact-us.component'
 import { TagSaleComponent } from './components/tag-sale/tag-sale.component'
-import { TagLancamentoComponent } from './components/tag-lancamento/tag-lancamento.component'
+import { TagNewComponent } from './components/tag-new/tag-new.component'
 import { WhatsappChatComponent } from './components/whatsapp-chat/whatsapp-chat.component'
-import { TagLancamentoDoisComponent } from './components/tag-lancamento-dois/tag-lancamento-dois.component'
-import { TagSaleDoisComponent } from './components/tag-sale-dois/tag-sale-dois.component'
-import { CuidadosBasicosComponent } from './components/cuidados-basicos/cuidados-basicos.component'
+import { TagNewTwoComponent } from './components/tag-new-two/tag-new-two.component'
+import { TagSaleTwoComponent } from './components/tag-sale-two/tag-sale-two.component'
 import { NewsletterFormComponent } from './components/newsletter-form/newsletter-form.component'
 import { NewsletterModalComponent } from './components/newsletter-modal/newsletter-modal.component'
-import { CarrinhoShippingBillingComponent } from './components/carrinho-shipping-billing/carrinho-shipping-billing.component'
+import { CartShippingBillingComponent } from './components/cart-shipping-billing/cart-shipping-billing.component'
 import { NewsletterFormModalComponent } from './components/newsletter-form-modal/newsletter-form-modal.component';
-import { CompraConcluidaComponent } from './components/compra-concluida/compra-concluida.component';
+import { CheckoutCompleted } from './components/checkout-completed/checkout-completed.component';
 import { FooterPaymentsComponent } from './components/footer-payments/footer-payments.component';
 import { ToastComponent } from './components/toast/toast.component';
+import {CartDetailsComponent} from "./components/cart-details/cart-details.component";
+import {BasicCareComponent} from "./components/basic-care/basic-care.component";
 
 
 @NgModule({
@@ -107,37 +107,37 @@ import { ToastComponent } from './components/toast/toast.component';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    SobreNosComponent,
-    PoliticaDeEnvioComponent,
-    PoliticaDeRetornoComponent,
-    PoliticaDePrivacidadeComponent,
-    TermosDeServicoComponent,
-    AcompanharProdutoComponent,
-    PerguntasFrequentesComponent,
+    AboutUsComponent,
+    ShippingPolicyComponent,
+    ReturnPolicyComponent,
+    PrivacyPolicyComponent,
+    TermsOfServiceComponent,
+    ProductTrackingComponent,
+    FAQComponent,
     HeaderCarouselComponent,
     HomeComponent,
-    NaoEncontradoComponent,
-    ProdutoDetalhesComponent,
+    NotFoundComponent,
+    ProductDetailsComponent,
     FooterSocialIconsComponent,
-    ProdutosListaComponent,
-    HeaderCarrinhoComponent,
-    CarrinhoDetalhesComponent,
+    ProductsListComponent,
+    HeaderCartComponent,
+    CartDetailsComponent,
     BaseUrlPipe,
-    FaixaMiniComponent,
-    HeaderContatoComponent,
+    MiniBannerComponent,
+    HeaderContactComponent,
     HeaderTopBarComponent,
-    FaleConoscoComponent,
+    ContactUsComponent,
     TagSaleComponent,
-    TagLancamentoComponent,
+    TagNewComponent,
     WhatsappChatComponent,
-    TagLancamentoDoisComponent,
-    TagSaleDoisComponent,
-    CuidadosBasicosComponent,
+    TagNewTwoComponent,
+    TagSaleTwoComponent,
+    BasicCareComponent,
     NewsletterFormComponent,
     NewsletterModalComponent,
-    CarrinhoShippingBillingComponent,
+    CartShippingBillingComponent,
     NewsletterFormModalComponent,
-    CompraConcluidaComponent,
+    CheckoutCompleted,
     FooterPaymentsComponent,
     ToastComponent,
     ToastsContainer
@@ -164,8 +164,8 @@ import { ToastComponent } from './components/toast/toast.component';
     //    ReactiveFormsModule
   ],
   providers: [
-    LojaSettingsService,
-    { provide: APP_INITIALIZER, useFactory: init_app, deps: [LojaSettingsService], multi: true },    
+    StoreSettingsService,
+    { provide: APP_INITIALIZER, useFactory: init_app, deps: [StoreSettingsService], multi: true },
     {provide : LocationStrategy , useClass: HashLocationStrategy},
     //{provide: LocationStrategy, useClass: PathLocationStrategy},
     {
@@ -174,7 +174,7 @@ import { ToastComponent } from './components/toast/toast.component';
     },
     SettingsService,
     HeaderCarouselService,
-    ProdutosService,
+    ProductsService,
     CurrencyPipe,
     NgbootstrapService
   ],

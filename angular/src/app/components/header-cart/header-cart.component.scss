@@ -1,0 +1,36 @@
+@import "../../../variables.scss";
+
+.product {
+  background-color: #fff;
+
+  .box-info {
+    text-align: left;
+    background-color: #fff;
+
+    ul {
+      margin-bottom: 5px;
+    }
+
+    .titulo {
+      font-size: 16px;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .subtitulo {
+      font-size: 12px;
+      font-weight: 700;
+      color: $product-subtitulo-color;
+    }
+
+    .preco-atual {
+      font-weight: normal;
+      color: $product-preco-color;
+    }
+  }
+
+  .box-buttons {
+    padding: 0 5px 5px 5px;
+    background-color: #FFF;;
+  }
+}

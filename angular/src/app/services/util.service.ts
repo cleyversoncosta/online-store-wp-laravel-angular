@@ -9,30 +9,30 @@ import { Injectable } from '@angular/core';
 export class UtilService {
 
   constructor(private meta: Meta, private settingsService: SettingsService) { }
-  
+
 	pad(n, width, z) {
 		z = z || '0';
 		n = n + '';
 		return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
-    }	
-    
-    dias() {
-      let dias: any[] = [];
+    }
+
+    days() {
+      let days: any[] = [];
       for (let i = 1; i <= 31; i++) {
-        dias.push(this.pad(i, 2, null));
+        days.push(this.pad(i, 2, null));
       }
-      return dias;   
+      return days;
     }
 
-    anos() {
-      let anos: any[] = [];
+    years() {
+      let years: any[] = [];
       for (let i = (2020 - 15); i >= (2020 - 80); i--) {
-        anos.push(i);
+        years.push(i);
       }
-      return anos;
+      return years;
     }
 
-    
+
 	emailMatch(email, email_conf) {
 		if (email === email_conf) {
 			return true;
@@ -40,9 +40,9 @@ export class UtilService {
 			return false;
 		 }
   }
-  
+
 	prepareENDate(data) {
-    
+
     if (data === null) return false;
 
 		let dia = data.substring(0,2);
@@ -60,7 +60,7 @@ export class UtilService {
   }
 
   addMetaTags(
-	  titleService, 
+	  titleService,
 	  metaService,
 	  title,
 	  description,
@@ -69,8 +69,8 @@ export class UtilService {
       ogType,
       priceAmount,
 	  ) {
-	
-	titleService.setTitle(title);   
+
+	titleService.setTitle(title);
 
 	metaService.updateTag({ name: 'canonical', content: this.settingsService.getSiteUrl()+url })
     metaService.updateTag({ name: 'description', content: description })
@@ -86,12 +86,12 @@ export class UtilService {
 
 	if (priceAmount !== null) {
 		metaService.updateTag({ name: 'og:price:amount', content: priceAmount })
-		metaService.updateTag({ name: 'og:price:currency', content: 'BRL' })	  
+		metaService.updateTag({ name: 'og:price:currency', content: 'BRL' })
 	} else {
 		metaService.removeTag("name='og:price:amount'");
 		metaService.removeTag("name='og:price:currency'");
-		
+
 	}
   }
-  
+
 }

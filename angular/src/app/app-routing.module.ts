@@ -1,41 +1,45 @@
-import { CompraConcluidaComponent } from './components/compra-concluida/compra-concluida.component';
-import { CuidadosBasicosComponent } from './components/cuidados-basicos/cuidados-basicos.component';
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+// @ts-ignore
+import {CheckoutCompleted} from './components/checkout-completed/checkout-completed.component';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 
-import { HomeComponent } from './components/home/home.component';
-import { PerguntasFrequentesComponent } from './components/perguntas-frequentes/perguntas-frequentes.component';
-import { AcompanharProdutoComponent } from './components/acompanhar-produto/acompanhar-produto.component';
-import { TermosDeServicoComponent } from './components/termos-de-servico/termos-de-servico.component';
-import { PoliticaDePrivacidadeComponent } from './components/politica-de-privacidade/politica-de-privacidade.component';
-import { PoliticaDeRetornoComponent } from './components/politica-de-retorno/politica-de-retorno.component';
-import { PoliticaDeEnvioComponent } from './components/politica-de-envio/politica-de-envio.component';
-import { SobreNosComponent } from './components/sobre-nos/sobre-nos.component';
-import { NaoEncontradoComponent } from './components/nao-encontrado/nao-encontrado.component';
-import { ProdutoDetalhesComponent } from './components/produto-detalhes/produto-detalhes.component';
-import { CarrinhoDetalhesComponent } from './components/carrinho-detalhes/carrinho-detalhes.component';
-import { FaleConoscoComponent } from './components/fale-conosco/fale-conosco.component';
+import {HomeComponent} from './components/home/home.component';
+import {FAQComponent} from './components/faq/faq.component';
+
+import {TermsOfServiceComponent} from './components/terms-of-service/terms-of-service.component';
+import {PrivacyPolicyComponent} from './components/privacy-policy/privacy-policy.component';
+import {ReturnPolicyComponent} from './components/return-policy/return-policy.component';
+import {ShippingPolicyComponent} from './components/shipping-policy/shipping-policy.component';
+import {AboutUsComponent} from './components/about-us/about-us.component';
+import {NotFoundComponent} from './components/not-found/not-found.component';
+import {ContactUsComponent} from './components/contact-us/contact-us.component';
+
+import {CartDetailsComponent} from "./components/cart-details/cart-details.component";
+import {ProductTrackingComponent} from "./components/product-tracking/product-tracking.component";
+import {BasicCareComponent} from "./components/basic-care/basic-care.component";
+import {ProductDetailsComponent} from "./components/product-details/product-details.component";
 
 const routes: Routes = [
-  { path: "", component: HomeComponent },
-  { path: "sobre-nos", component: SobreNosComponent },
-  { path: "politica-de-envio", component: PoliticaDeEnvioComponent },
-  { path: "politica-de-retorno", component: PoliticaDeRetornoComponent },
-  { path: "politica-de-privacidade", component: PoliticaDePrivacidadeComponent },
-  { path: "fale-conosco", component: FaleConoscoComponent },
-  { path: "termos-de-servico", component: TermosDeServicoComponent },
-  { path: "acompanhar-produto", component: AcompanharProdutoComponent },
-  { path: "perguntas-frequentes", component: PerguntasFrequentesComponent },
-  { path: "produto/:id/:slug", component: ProdutoDetalhesComponent },
-  { path: "carrinho/detalhes", component: CarrinhoDetalhesComponent },
-  { path: "cuidados-basicos", component: CuidadosBasicosComponent },
-  { path: "compra-concluida", component: CompraConcluidaComponent },
-  { path: "nao-encontrado", component: NaoEncontradoComponent },
-  { path: "**", component: NaoEncontradoComponent },
+  {path: "", component: HomeComponent},
+  {path: "about-us", component: AboutUsComponent},
+  {path: "shipping-policy", component: ShippingPolicyComponent},
+  {path: "return-policy", component: ReturnPolicyComponent},
+  {path: "privacy-policy", component: PrivacyPolicyComponent},
+  {path: "contact-us", component: ContactUsComponent},
+  {path: "terms-of-service", component: TermsOfServiceComponent},
+  {path: "product-tracking", component: ProductTrackingComponent},
+  {path: "faq", component: FAQComponent},
+  {path: "product/:id/:slug", component: ProductDetailsComponent},
+  {path: "cart/detalhes", component: CartDetailsComponent},
+  {path: "basic-care", component: BasicCareComponent},
+  {path: "checkout-completed", component: CheckoutCompleted},
+  {path: "not-found", component: NotFoundComponent},
+  {path: "**", component: NotFoundComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'top', useHash: true })],
+  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'top', useHash: true})],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

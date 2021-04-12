@@ -24,12 +24,12 @@ function openPagarMeCheckout(encryptionKey, param) {
     // É necessário passar os valores boolean em "var params" como string
     var paramsPagarme = {
       uiColor: "#bababa", //Cor primária da interface de Checkout.
-      amount: param.valorAPagar * 100, //Valor da transação (em centavos) a ser capturada pelo Checkout
+      amount: param.totalsToPay * 100, //Valor da transação (em centavos) a ser capturada pelo Checkout
       buttonText: "Pagar", //Define o texto do botão final de pagamento.
       customerData: "false", // Caso não deseje capturar dados do cliente pelo Checkout, setar como false.
       paymentMethods: "credit_card",
-      maxInstallments: param.maxParcelas, //Número máximo de parcelas aceitas, de 1 a 12.
-      freeInstallments: param.maxParcelas, //Número de parcelas que não terão juros cobrados
+      maxInstallments: param.maxInstallments, //Número máximo de parcelas aceitas, de 1 a 12.
+      freeInstallments: param.maxInstallments, //Número de parcelas que não terão juros cobrados
       defaultInstallment: 1, //Define a parcela padrão selecionada ao abrir o checkout
       interestRate: 0, //Taxa de juros a ser cobrada na transação
       //"postbackUrl": "https://dominiodaloja.com.br/", //Endereço da URL de POSTback do seu sistema, que receberá as notificações das alterações de status das transações
@@ -92,26 +92,26 @@ function hideCookieConsent() {
   e.style.display = "none";
 }
 
-function fbViewContent(produto) {
+function fbViewContent(product) {
   let data = {
-    content_name: produto.title,
-    content_category: produto.categories[0].name,
-    content_ids: produto.id,
+    content_name: product.title,
+    content_category: product.categories[0].name,
+    content_ids: product.id,
     content_type: "product",
-    value: produto.price,
+    value: product.price,
     currency: "BRL",
   };
 
   fbq("track", "ViewContent", data);
 }
 
-function fbAddToCart(produto) {
+function fbAddToCart(product) {
   var data = {
-    content_ids: produto.id,
+    content_ids: product.id,
     content_type: "product",
     num_items: 1,
-    content_name: produto.name,
-    value: produto.price,
+    content_name: product.name,
+    value: product.price,
     currency: "BRL",
   };
 

@@ -1,8 +1,8 @@
 import { CartService } from './../../services/cart.service';
-import { ProdutosService } from './../../services/produtos.service'
+import { ProductsService } from './../../services/products.service'
 import { Component, OnInit } from '@angular/core'
 
-import { LojaSettingsService } from './../../services/loja-settings.service'
+import { StoreSettingsService } from '../../services/store-settings.service'
 
 @Component({
   selector: 'app-header-top-bar',
@@ -21,33 +21,33 @@ export class HeaderTopBarComponent implements OnInit {
   valorPendenteFreteGratis : number = 0
 
   constructor(
-    private produtosService: ProdutosService, 
-    private lojaSettingsService: LojaSettingsService,
+    private ProductsService: ProductsService,
+    private storeSettingsService: StoreSettingsService,
     private cartService: CartService
   ) { }
 
   ngOnInit(): void {
 
-    this.showTopBar = Boolean(Number(this.lojaSettingsService.getShowTopBar()))
+    this.showTopBar = Boolean(Number(this.storeSettingsService.getShowTopBar()))
 
-    this.tipoFreteDisponivel = this.lojaSettingsService.getTipoFreteDisponivel()
+    this.tipoFreteDisponivel = this.storeSettingsService.getTipoFreteDisponivel()
 
-    this.freteGratisMinLimit = this.lojaSettingsService.getFreteGratisMinLimit()
+    this.freteGratisMinLimit = this.storeSettingsService.getFreteGratisMinLimit()
 
-    this.cartService.obterValorDoPedido().subscribe((data: any) => {
+    this.cartService.getOrderTotals().subscribe((data: any) => {
       this.valorPendenteFreteGratis = this.freteGratisMinLimit - data
-    }) 
-    
+    })
+
     //this.showHideFieworks()
 
   }
-  
+
 
   showHideFieworks() {
 
     if ((this.showedFireworks) && (this.valorPendenteFreteGratis > 0)) {
       this.showedFireworks = false
-    }    
+    }
 
     if ((this.valorPendenteFreteGratis <= 0) && (this.showFireworks === false) && (this.showedFireworks === false)) {
         this.showFireworks = true
@@ -57,7 +57,7 @@ export class HeaderTopBarComponent implements OnInit {
       setTimeout(() => {
         this.showedFireworks = true
         this.showFireworks = false
-      }, 4000)   
+      }, 4000)
     }
   }
 

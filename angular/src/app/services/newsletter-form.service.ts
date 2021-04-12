@@ -1,6 +1,6 @@
 import {
-  LojaSettingsService
-} from './loja-settings.service';
+  StoreSettingsService
+} from './store-settings.service';
 import {
   HttpClient
 } from '@angular/common/http';
@@ -17,13 +17,13 @@ import {
 })
 export class NewsletterFormService {
 
-  constructor(private http: HttpClient, private settingsService: SettingsService, private lojaSettingsService: LojaSettingsService) {}
+  constructor(private http: HttpClient, private settingsService: SettingsService, private storeSettingsService: StoreSettingsService) {}
 
   addNewsletterFooterForm(data) {
     let promise = new Promise((resolve, reject) => {
 
       let nData: any = {
-        segment: this.lojaSettingsService.getMauticSegmentoNWF(),
+        segment: this.storeSettingsService.getMauticSegmentoNWF(),
         firstname: data.nome,
         email: data.email,
       }
@@ -41,7 +41,7 @@ export class NewsletterFormService {
     let promise = new Promise((resolve, reject) => {
 
       let nData: any = {
-        segment: this.lojaSettingsService.getMauticSegmentoNWM(),
+        segment: this.storeSettingsService.getMauticSegmentoNWM(),
         firstname: data.nome,
         email: data.email,
       }

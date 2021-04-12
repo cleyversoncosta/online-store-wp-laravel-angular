@@ -1,6 +1,6 @@
 import { LocalStorage } from '@ngx-pwa/local-storage'
-import { LojaSettingsService } from './../../services/loja-settings.service'
-import { NewsletterModalService } from './newsletter-modal.service'
+import { StoreSettingsService } from '../../services/store-settings.service'
+import { NewsletterModalService } from '../../services/newsletter-modal.service'
 import { Component, OnInit, ViewEncapsulation, ViewChild  } from '@angular/core'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 
@@ -13,7 +13,7 @@ declare const getScrollPosition: any;
   encapsulation: ViewEncapsulation.None,
 })
 export class NewsletterModalComponent implements OnInit  {
-  
+
   closeResult: string
   imagem_topo: string = null
   imagem_lado: string = null
@@ -22,13 +22,13 @@ export class NewsletterModalComponent implements OnInit  {
 
   @ViewChild('contentModalNewsletter') contentModalNewsletter : any
 
-  constructor(private modalService: NgbModal, private lojaSettingsService: LojaSettingsService, private localStorage: LocalStorage) {}
+  constructor(private modalService: NgbModal, private storeSettingsService: StoreSettingsService, private localStorage: LocalStorage) {}
 
   ngOnInit(): void {
 
-    this.imagem_topo = this.lojaSettingsService.getNewsletterModalImagemTopo()
+    this.imagem_topo = this.storeSettingsService.getNewsletterModalImagemTopo()
 
-    this.imagem_lado = this.lojaSettingsService.getNewsletterModalImagemLado()
+    this.imagem_lado = this.storeSettingsService.getNewsletterModalImagemLado()
 
     this.localStorage.getItem('showModalNewsletter').subscribe((data: any) => {
       //console.log('data: '+ JSON.stringify(data))
@@ -43,16 +43,16 @@ export class NewsletterModalComponent implements OnInit  {
           this.openModal()
         }
       }
-    })   
+    })
   }
 
   scroll = (event): void => {
 
     if (this.showedModalNewsletterScrollPerc === false) {
-  
+
       let scrollPerc = getScrollPosition()
 
-      if (scrollPerc >= this.lojaSettingsService.getNewsletterModalTriggerValue()) {
+      if (scrollPerc >= this.storeSettingsService.getNewsletterModalTriggerValue()) {
         this.modalService.open(this.contentModalNewsletter, { centered: true })
         this.showedModalNewsletterScrollPerc = true
       }
@@ -64,7 +64,7 @@ export class NewsletterModalComponent implements OnInit  {
     let timestamp = new Date().getTime()
     //console.log('timestamp: '+timestamp)
 
-    let timestampToAdd = this.lojaSettingsService.getNewsletterModalExpiry()
+    let timestampToAdd = this.storeSettingsService.getNewsletterModalExpiry()
     //console.log('timestampToAdd: '+timestampToAdd)
 
     const item = {
@@ -74,11 +74,11 @@ export class NewsletterModalComponent implements OnInit  {
     //console.log('expiry: '+item.expiry)
 
     this.localStorage.setItem('showModalNewsletter', item).subscribe(() => {
-      switch (this.lojaSettingsService.getNewsletterModalTrigger()) {
+      switch (this.storeSettingsService.getNewsletterModalTrigger()) {
         case 'time': {
           setTimeout(() => {
             this.modalService.open(this.contentModalNewsletter, { centered: true })
-          }, this.lojaSettingsService.getNewsletterModalTriggerValue())      
+          }, this.storeSettingsService.getNewsletterModalTriggerValue())
           break;
         }
         case 'scroll-perc': {
@@ -86,7 +86,7 @@ export class NewsletterModalComponent implements OnInit  {
           break;
         }
       }
-    })   
+    })
   }
 
   ngOnDestroy() {
