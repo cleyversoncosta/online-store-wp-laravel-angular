@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 class ProductController extends Controller
 {
 
-    private $only_product = array('id', 'name', 'slug', 'description', 'price', 'regular_price', 'sale_price', 'images', 'categories');
+    private $only_product = array('id', 'name', 'slug', 'description', 'price', 'regular_price', 'sale_price', 'images', 'categories', 'stock_quantity');
     private $only_product_image = array('id', 'name', 'src');
 
     public function index()

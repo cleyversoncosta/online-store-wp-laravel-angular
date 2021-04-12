@@ -8,5 +8,6 @@ export interface ProductInterface {
   price: number;
   regular_price: number;
   sale_price: number;
+  stock_quantity: number;
   images: Array<ProductImageInterface>
 }
