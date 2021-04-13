@@ -1,6 +1,6 @@
-import { NewsletterFormService } from '../../services/newsletter-form.service';
+import { NewsletterFormService } from '../../../services/newsletter-form.service';
 import { Component, OnInit } from '@angular/core';
-import { StoreSettingsService } from '../../services/store-settings.service';
+import { StoreSettingsService } from '../../../services/store-settings.service';
 
 import { NgxSpinnerService } from "ngx-spinner";
 

@@ -6,10 +6,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {HomeComponent} from './components/home/home.component';
 import {FAQComponent} from './components/faq/faq.component';
 
-import {TermsOfServiceComponent} from './components/terms-of-service/terms-of-service.component';
-import {PrivacyPolicyComponent} from './components/privacy-policy/privacy-policy.component';
-import {ReturnPolicyComponent} from './components/return-policy/return-policy.component';
-import {ShippingPolicyComponent} from './components/shipping-policy/shipping-policy.component';
+
 import {AboutUsComponent} from './components/about-us/about-us.component';
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {ContactUsComponent} from './components/contact-us/contact-us.component';
@@ -18,6 +15,10 @@ import {CartDetailsComponent} from "./components/cart-details/cart-details.compo
 import {ProductTrackingComponent} from "./components/product-tracking/product-tracking.component";
 import {BasicCareComponent} from "./components/basic-care/basic-care.component";
 import {ProductDetailsComponent} from "./components/product-details/product-details.component";
+import {ShippingPolicyComponent} from "./components/policies-and-terms/shipping-policy/shipping-policy.component";
+import {PrivacyPolicyComponent} from "./components/policies-and-terms/privacy-policy/privacy-policy.component";
+import {ReturnPolicyComponent} from "./components/policies-and-terms/return-policy/return-policy.component";
+import {TermsOfServiceComponent} from "./components/policies-and-terms/terms-of-service/terms-of-service.component";
 
 const routes: Routes = [
   {path: "", component: HomeComponent},

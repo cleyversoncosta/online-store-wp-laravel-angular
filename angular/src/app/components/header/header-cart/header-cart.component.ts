@@ -1,9 +1,9 @@
-import { CartService } from './../../services/cart.service';
-import { StoreSettingsService } from '../../services/store-settings.service'
-import { SettingsService } from '../../services/settings.service'
-import { Component, OnInit, Input } from '@angular/core'
+import { CartService } from './../../../services/cart.service';
+import { StoreSettingsService } from '../../../services/store-settings.service'
+import { SettingsService } from '../../../services/settings.service'
+import { ProductsService } from '../../../services/products.service'
 
-import { ProductsService } from '../../services/products.service'
+import { Component, OnInit, Input } from '@angular/core'
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap'
 
 @Component({

@@ -1,15 +1,15 @@
-import { SettingsService } from './../../services/settings.service';
-import { UtilService } from './../../services/util.service';
+import { SettingsService } from './../../../services/settings.service';
+import { UtilService } from './../../../services/util.service';
 import { Router } from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-privacy-policy',
-  templateUrl: './privacy-policy.component.html',
-  styleUrls: ['./privacy-policy.component.scss']
+  selector: 'app-shipping-policy',
+  templateUrl: './shipping-policy.component.html',
+  styleUrls: ['./shipping-policy.component.scss']
 })
-export class PrivacyPolicyComponent implements OnInit {
+export class ShippingPolicyComponent implements OnInit {
 
 
   constructor(private titleService: Title,
@@ -23,7 +23,7 @@ export class PrivacyPolicyComponent implements OnInit {
 
 
 	addMetaTags() {
-		let title = 'Política de privacidade - NOME-DA-LOJA'
+		let title = 'Política de envio/frete - NOME-DA-LOJA'
 		let description = ''
 		let url = this.router.url
 		let imageURL = this.settingsService.getSocialShareImageUrl()
@@ -41,7 +41,6 @@ export class PrivacyPolicyComponent implements OnInit {
 		  priceAmount
 		)
   }
-
 
   ngOnInit(): void {
 

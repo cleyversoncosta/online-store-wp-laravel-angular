@@ -1,15 +1,15 @@
-import { SettingsService } from './../../services/settings.service';
-import { UtilService } from './../../services/util.service';
+import { SettingsService } from './../../../services/settings.service';
+import { UtilService } from './../../../services/util.service';
 import { Router } from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-return-policy',
-  templateUrl: './return-policy.component.html',
-  styleUrls: ['./return-policy.component.scss']
+  selector: 'app-terms-of-service',
+  templateUrl: './terms-of-service.component.html',
+  styleUrls: ['./terms-of-service.component.scss']
 })
-export class ReturnPolicyComponent implements OnInit {
+export class TermsOfServiceComponent implements OnInit {
 
 
   constructor(private titleService: Title,
@@ -23,7 +23,7 @@ export class ReturnPolicyComponent implements OnInit {
 
 
 	addMetaTags() {
-		let title = 'Política de retorno (troca e devolução) - NOME-DA-LOJA'
+		let title = 'Termos de serviço - NOME-DA-LOJA'
 		let description = ''
 		let url = this.router.url
 		let imageURL = this.settingsService.getSocialShareImageUrl()
@@ -41,7 +41,6 @@ export class ReturnPolicyComponent implements OnInit {
 		  priceAmount
 		)
   }
-
 
   ngOnInit(): void {
 

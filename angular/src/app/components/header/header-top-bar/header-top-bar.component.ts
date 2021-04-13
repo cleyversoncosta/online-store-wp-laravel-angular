@@ -1,8 +1,8 @@
-import { CartService } from './../../services/cart.service';
-import { ProductsService } from './../../services/products.service'
-import { Component, OnInit } from '@angular/core'
+import { CartService } from './../../../services/cart.service';
+import { ProductsService } from './../../../services/products.service'
+import { StoreSettingsService } from '../../../services/store-settings.service'
 
-import { StoreSettingsService } from '../../services/store-settings.service'
+import { Component, OnInit } from '@angular/core'
 
 @Component({
   selector: 'app-header-top-bar',

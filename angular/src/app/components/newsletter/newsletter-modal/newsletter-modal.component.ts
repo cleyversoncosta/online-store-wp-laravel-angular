@@ -1,6 +1,6 @@
 import { LocalStorage } from '@ngx-pwa/local-storage'
-import { StoreSettingsService } from '../../services/store-settings.service'
-import { NewsletterModalService } from '../../services/newsletter-modal.service'
+import { StoreSettingsService } from '../../../services/store-settings.service'
+import { NewsletterModalService } from '../../../services/newsletter-modal.service'
 import { Component, OnInit, ViewEncapsulation, ViewChild  } from '@angular/core'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 
