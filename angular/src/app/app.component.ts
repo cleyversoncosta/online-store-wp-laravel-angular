@@ -2,8 +2,8 @@ import {
   LocalStorage
 } from '@ngx-pwa/local-storage';
 import {
-  LojaSettingsService
-} from './services/loja-settings.service';
+  StoreSettingsService
+} from './services/store-settings.service';
 import {
   SettingsService
 } from './services/settings.service';
@@ -31,6 +31,7 @@ import {
 } from '@angular/router';
 
 declare const hideCookieConsent: any;
+
 //declare let gtag: Function;
 
 @Component({
@@ -51,7 +52,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private settingsService: SettingsService,
-    private lojaSettingsService: LojaSettingsService,
+    private storeSettingsService: StoreSettingsService,
     private ccService: NgcCookieConsentService,
     private translateService: TranslateService,
     private localStorage: LocalStorage,
@@ -101,7 +102,6 @@ export class AppComponent implements OnInit, OnDestroy {
           }
         })
       });
-
 
 
     this.initializeSubscription = this.ccService.initialize$.subscribe(

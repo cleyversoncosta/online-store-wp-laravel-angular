@@ -8,64 +8,65 @@ use App\Http\Controllers\Controller;
 class ProductController extends Controller
 {
 
-	
-	public function index()
-	{
+    private $only_product = array('id', 'name', 'slug', 'description', 'price', 'regular_price', 'sale_price', 'images', 'categories', 'stock_quantity');
+    private $only_product_image = array('id', 'name', 'src');
 
-		$produtos = Woocommerce::get('products', ['status' => 'publish']);
+    public function index()
+    {
 
-		foreach ($produtos as $key => $produto) {
+        $produtos_arr = [];
 
-			$produtos[$key]['new_collection'] = 0;
-			$produtos[$key]['subtitle'] = "";
+        foreach (Woocommerce::get('products', ['status' => 'publish']) as $keyA => $produto) {
 
-			foreach ($produto['attributes'] as $attributes) {
-				if ($attributes['name'] === 'new-collection') {
-					$produtos[$key]['new_collection'] = (int) $attributes['options'][0];
-				}
-			}
+            $produtos_arr[$keyA] = \Arr::except(\Arr::only($produto, $this->only_product), ['description']);
 
-			foreach ($produto['meta_data'] as $meta_data) {
-				if ($meta_data['key'] === 'wc_ps_subtitle') {
-					$produtos[$key]['subtitle'] = $meta_data['value'];
-				}
-			}
-		}
+            $images = [];
 
-		return response()->json($produtos);
+            foreach ($produto['images'] as $keyB => $image) {
+
+                if (count($produto['images']) == 1) {
+                    $images[] = \Arr::only($image, $this->only_product_image);
+                }
+
+                $images[] = \Arr::only($image, $this->only_product_image);
+            }
+
+            $produtos_arr[$keyA]['images'] = $images;
+
+        }
+
+        return response()->json($produtos_arr);
+    }
+
+    public function show($id)
+    {
+
+        $produto = Woocommerce::get('products/' . $id, ['status' => 'publish']);
+
+        $images = [];
+        foreach ($produto['images'] as $keyB => $image) {
+
+            if (count($produto['images']) == 1) {
+                $images[] = \Arr::only($image, $this->only_product_image);
+            }
+
+            $images[] = \Arr::only($image, $this->only_product_image);
+        }
+
+        $produto['images'] = $images;
+
+		return response()->json(\Arr::only($produto, $this->only_product));
 	}
 
-	public function show($id)
-	{
-		$produto = Woocommerce::get('products/' . $id, ['status' => 'publish']);
+    public function create(Request $request)
+    {
+    }
 
-		$produto['new_collection'] = 0;
-		$produto['subtitle'] = "";
+    public function update(Request $request, $id)
+    {
+    }
 
-		foreach ($produto['attributes'] as $attributes) {
-			if ($attributes['name'] === 'new-collection') {
-				$produto['new_collection'] = (int) $attributes['options'][0];
-			}
-		}
-
-		foreach ($produto['meta_data'] as $meta_data) {
-			if ($meta_data['key'] === 'wc_ps_subtitle') {
-				$produto['subtitle'] = $meta_data['value'];
-			}
-		}
-
-		return response()->json($produto);
-	}
-
-	public function create(Request $request)
-	{
-	}
-
-	public function update(Request $request, $id)
-	{
-	}
-
-	public function destroy($id)
-	{
-	}
+    public function destroy($id)
+    {
+    }
 }

@@ -1,14 +1,14 @@
-import { ToastsContainer } from './components/toast/toasts-container.component';
-import { NgbootstrapService } from './services/ngbootstrap.service';
-import { BrowserModule } from '@angular/platform-browser'
-import { NgModule, LOCALE_ID, APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { HttpClientModule, HttpClient } from '@angular/common/http'
+import {ToastsContainer} from './components/toast/toasts-container.component';
+import {NgbootstrapService} from './services/ngbootstrap.service';
+import {BrowserModule} from '@angular/platform-browser'
+import {NgModule, LOCALE_ID, APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core'
+import {HttpClientModule, HttpClient} from '@angular/common/http'
 
-import { AppRoutingModule } from './app-routing.module'
-import { AppComponent } from './app.component'
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {AppRoutingModule} from './app-routing.module'
+import {AppComponent} from './app.component'
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
+import {FormsModule, ReactiveFormsModule} from '@angular/forms'
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
@@ -16,8 +16,9 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
-import { NgxSpinnerModule } from "ngx-spinner";
-import { NgxMaskModule, IConfig } from 'ngx-mask'
+
+import {NgxSpinnerModule} from "ngx-spinner";
+import {NgxMaskModule, IConfig} from 'ngx-mask'
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -25,7 +26,7 @@ const maskConfig: Partial<IConfig> = {
 
 import {NgcCookieConsentModule, NgcCookieConsentConfig} from 'ngx-cookieconsent';
 
-const cookieConfig:NgcCookieConsentConfig = {
+const cookieConfig: NgcCookieConsentConfig = {
   "cookie": {
     "domain": "dominiodaloja.com.br"
   },
@@ -46,103 +47,92 @@ const cookieConfig:NgcCookieConsentConfig = {
   "type": "info"
 };
 
-export function init_app(lojaSettingsService: LojaSettingsService) {
-  return () => lojaSettingsService.setLojaSettings()
+export function init_app(storeSettingsService: StoreSettingsService) {
+  return () => storeSettingsService.setLojaSettings()
 }
 
 // LOCALE
 import localePt from '@angular/common/locales/pt'
-import { registerLocaleData, CurrencyPipe, LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@angular/common'
+import {
+  registerLocaleData,
+  CurrencyPipe,
+  LocationStrategy,
+  HashLocationStrategy,
+  PathLocationStrategy
+} from '@angular/common'
+
 registerLocaleData(localePt, 'pt')
 
 // PIPES
-import { BaseUrlPipe } from './pipes/base-url.pipe'
+import {BaseUrlPipe} from './pipes/base-url.pipe'
 
 // SERVICES
-import { SettingsService } from './services/settings.service'
-import { ProdutosService } from './services/produtos.service'
-import { HeaderCarouselService } from './components/header-carousel/header-carousel.service'
-import { LojaSettingsService } from './services/loja-settings.service'
-
+import {SettingsService} from './services/settings.service'
+import {ProductsService} from './services/products.service'
+import {StoreSettingsService} from './services/store-settings.service'
+import {HeaderCarouselService} from './services/header-carousel.service'
 
 // COMPONENTS
-import { HeaderComponent } from './components/header/header.component'
-import { FooterComponent } from './components/footer/footer.component'
-import { SobreNosComponent } from './components/sobre-nos/sobre-nos.component'
-import { PoliticaDeEnvioComponent } from './components/politica-de-envio/politica-de-envio.component'
-import { PoliticaDeRetornoComponent } from './components/politica-de-retorno/politica-de-retorno.component'
-import { PoliticaDePrivacidadeComponent } from './components/politica-de-privacidade/politica-de-privacidade.component'
-import { TermosDeServicoComponent } from './components/termos-de-servico/termos-de-servico.component'
-import { AcompanharProdutoComponent } from './components/acompanhar-produto/acompanhar-produto.component'
-import { PerguntasFrequentesComponent } from './components/perguntas-frequentes/perguntas-frequentes.component'
-import { HeaderCarouselComponent } from './components/header-carousel/header-carousel.component'
-import { HomeComponent } from './components/home/home.component'
-import { NaoEncontradoComponent } from './components/nao-encontrado/nao-encontrado.component'
-import { ProdutoDetalhesComponent } from './components/produto-detalhes/produto-detalhes.component'
-import { FooterSocialIconsComponent } from './components/footer-social-icons/footer-social-icons.component'
-import { ProdutosListaComponent } from './components/produtos-lista/produtos-lista.component'
-import { HeaderCarrinhoComponent } from './components/header-carrinho/header-carrinho.component'
-import { CarrinhoDetalhesComponent } from './components/carrinho-detalhes/carrinho-detalhes.component'
-import { FaixaMiniComponent } from './components/faixa-mini/faixa-mini.component'
-import { HeaderContatoComponent } from './components/header-contato/header-contato.component'
-import { HeaderTopBarComponent } from './components/header-top-bar/header-top-bar.component'
-import { FaleConoscoComponent } from './components/fale-conosco/fale-conosco.component'
-import { TagSaleComponent } from './components/tag-sale/tag-sale.component'
-import { TagLancamentoComponent } from './components/tag-lancamento/tag-lancamento.component'
-import { WhatsappChatComponent } from './components/whatsapp-chat/whatsapp-chat.component'
-import { TagLancamentoDoisComponent } from './components/tag-lancamento-dois/tag-lancamento-dois.component'
-import { TagSaleDoisComponent } from './components/tag-sale-dois/tag-sale-dois.component'
-import { CuidadosBasicosComponent } from './components/cuidados-basicos/cuidados-basicos.component'
-import { NewsletterFormComponent } from './components/newsletter-form/newsletter-form.component'
-import { NewsletterModalComponent } from './components/newsletter-modal/newsletter-modal.component'
-import { CarrinhoShippingBillingComponent } from './components/carrinho-shipping-billing/carrinho-shipping-billing.component'
-import { NewsletterFormModalComponent } from './components/newsletter-form-modal/newsletter-form-modal.component';
-import { CompraConcluidaComponent } from './components/compra-concluida/compra-concluida.component';
-import { FooterPaymentsComponent } from './components/footer-payments/footer-payments.component';
-import { ToastComponent } from './components/toast/toast.component';
 
+import {AboutUsComponent} from './components/about-us/about-us.component'
+import {FAQComponent} from './components/faq/faq.component'
+
+import {HomeComponent} from './components/home/home.component'
+import {NotFoundComponent} from './components/not-found/not-found.component'
+import {ProductTrackingComponent} from './components/product-tracking/product-tracking.component'
+import {ProductDetailsComponent} from './components/product-details/product-details.component'
+import {ProductsListComponent} from './components/products-list/products-list.component'
+import {MiniBannerComponent} from './components/mini-banner/mini-banner.component'
+import {ContactUsComponent} from './components/contact-us/contact-us.component'
+import {WhatsappChatComponent} from './components/whatsapp-chat/whatsapp-chat.component'
+import {CartShippingBillingComponent} from './components/cart-shipping-billing/cart-shipping-billing.component'
+import {CheckoutCompleted} from './components/checkout-completed/checkout-completed.component';
+import {ToastComponent} from './components/toast/toast.component';
+import {CartDetailsComponent} from "./components/cart-details/cart-details.component";
+import {BasicCareComponent} from "./components/basic-care/basic-care.component";
+import {FooterModule} from "./components/footer/footer.module";
+import {HeaderModule} from "./components/header/header.module";
+import {TagsModule} from "./components/tags/tags.module";
+import {PoliciesAndTermsModule} from "./components/policies-and-terms/policies-and-terms.module";
+import {NewsletterModule} from "./components/newsletter/newsletter.module";
+import {HeaderCarouselComponent} from "./components/header-carousel/header-carousel.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    SobreNosComponent,
-    PoliticaDeEnvioComponent,
-    PoliticaDeRetornoComponent,
-    PoliticaDePrivacidadeComponent,
-    TermosDeServicoComponent,
-    AcompanharProdutoComponent,
-    PerguntasFrequentesComponent,
-    HeaderCarouselComponent,
+
+    // App compoments
     HomeComponent,
-    NaoEncontradoComponent,
-    ProdutoDetalhesComponent,
-    FooterSocialIconsComponent,
-    ProdutosListaComponent,
-    HeaderCarrinhoComponent,
-    CarrinhoDetalhesComponent,
-    BaseUrlPipe,
-    FaixaMiniComponent,
-    HeaderContatoComponent,
-    HeaderTopBarComponent,
-    FaleConoscoComponent,
-    TagSaleComponent,
-    TagLancamentoComponent,
+    AboutUsComponent,
+    ProductTrackingComponent,
+    FAQComponent,
+    NotFoundComponent,
+    ProductDetailsComponent,
+    ProductsListComponent,
+    CartDetailsComponent,
+    MiniBannerComponent,
     WhatsappChatComponent,
-    TagLancamentoDoisComponent,
-    TagSaleDoisComponent,
-    CuidadosBasicosComponent,
-    NewsletterFormComponent,
-    NewsletterModalComponent,
-    CarrinhoShippingBillingComponent,
-    NewsletterFormModalComponent,
-    CompraConcluidaComponent,
-    FooterPaymentsComponent,
+    ContactUsComponent,
+    BasicCareComponent,
+    CartShippingBillingComponent,
+    CheckoutCompleted,
+    HeaderCarouselComponent,
+
+
+    //Pipes
+    BaseUrlPipe,
+
+    // Libs
     ToastComponent,
     ToastsContainer
   ],
   imports: [
+    TagsModule,
+    PoliciesAndTermsModule,
+    NewsletterModule,
+    FooterModule,
+    HeaderModule,
+
     BrowserModule,
     AppRoutingModule,
     NgbModule,
@@ -156,17 +146,17 @@ import { ToastComponent } from './components/toast/toast.component';
     TranslateModule.forRoot({
       defaultLanguage: 'pt-br',
       loader: {
-          provide: TranslateLoader,
-          useFactory: (createTranslateLoader),
-          deps: [HttpClient]
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
       }
     })
     //    ReactiveFormsModule
   ],
   providers: [
-    LojaSettingsService,
-    { provide: APP_INITIALIZER, useFactory: init_app, deps: [LojaSettingsService], multi: true },    
-    {provide : LocationStrategy , useClass: HashLocationStrategy},
+    StoreSettingsService,
+    {provide: APP_INITIALIZER, useFactory: init_app, deps: [StoreSettingsService], multi: true},
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
     //{provide: LocationStrategy, useClass: PathLocationStrategy},
     {
       provide: LOCALE_ID,
@@ -174,7 +164,7 @@ import { ToastComponent } from './components/toast/toast.component';
     },
     SettingsService,
     HeaderCarouselService,
-    ProdutosService,
+    ProductsService,
     CurrencyPipe,
     NgbootstrapService
   ],
@@ -182,5 +172,6 @@ import { ToastComponent } from './components/toast/toast.component';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(private settingsService: SettingsService) { }
+  constructor(private settingsService: SettingsService) {
+  }
 }

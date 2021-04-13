@@ -25,37 +25,37 @@ export class FacebookService {
     private cartService: CartService
   ) {}
 
-  fbViewContent(produto) {
-    fbViewContent(produto)
+  fbViewContent(product) {
+    fbViewContent(product)
   }
 
 
-  fbAddToCart(produto, produtos) {
+  fbAddToCart(product, products) {
     let count = 0
 
-      if (produtos !== null) {
-        produtos.forEach(p => {
-          if (produto.id === p.id) {
+      if (products !== null) {
+        products.forEach(p => {
+          if (product.id === p.id) {
             count++
           }
         })
       }
 
       if (count <= 1) {
-        fbAddToCart(produto)
+        fbAddToCart(product)
       }
 
   }
 
-  fbInitiateCheckout(produtosCarrinho, valorDoPedido) {
- 
-      //console.log(produtosDoCarrinho)
+  fbInitiateCheckout(cartProducts, orderTotals) {
 
-      if (produtosCarrinho !== null) {
+      //console.log(productsDoCart)
+
+      if (cartProducts !== null) {
 
         let ids = []
         let contents = []
-        produtosCarrinho.forEach(item => {
+        cartProducts.forEach(item => {
           ids.push(item.id)
 
           let data = {
@@ -67,19 +67,19 @@ export class FacebookService {
           contents.push(data)
         })
 
-        fbInitiateCheckout(ids, contents, valorDoPedido)
+        fbInitiateCheckout(ids, contents, orderTotals)
 
       }
   }
 
 
-  fbPurchase(produtosCarrinho, valorDoPedido) {
-   
-    if (produtosCarrinho !== null) {
+  fbPurchase(cartProducts, orderTotals) {
+
+    if (cartProducts !== null) {
 
       let ids = []
       let contents = []
-      produtosCarrinho.forEach(item => {
+      cartProducts.forEach(item => {
         ids.push(item.id)
 
         let data = {
@@ -91,22 +91,22 @@ export class FacebookService {
         contents.push(data)
       })
 
-      fbPurchase(ids, contents, valorDoPedido)
+      fbPurchase(ids, contents, orderTotals)
     }
   }
 
 
   fbCompleteRegistration() {
     //return new Promise((resolve, reject) => {
-    this.localStorage.getItem('carrinho').subscribe((produtosDoCarrinho: any[]) => {
+    this.localStorage.getItem('cart').subscribe((productsDoCart: any[]) => {
 
-      //console.log(produtosDoCarrinho)
+      //console.log(productsDoCart)
 
-      if (produtosDoCarrinho !== null) {
+      if (productsDoCart !== null) {
 
         let ids = []
         let contents = []
-        produtosDoCarrinho.forEach(item => {
+        productsDoCart.forEach(item => {
           ids.push(item.id)
 
           let data = {
@@ -118,8 +118,8 @@ export class FacebookService {
           contents.push(data)
         })
 
-        this.cartService.obterValorDoPedido().subscribe((valorDoPedido) => {
-          fbCompleteRegistration(ids, contents, valorDoPedido)
+        this.cartService.getOrderTotals().subscribe((orderTotals) => {
+          fbCompleteRegistration(ids, contents, orderTotals)
         })
       }
     })

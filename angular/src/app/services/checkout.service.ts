@@ -16,14 +16,14 @@ import {
   NgxSpinnerService
 } from 'ngx-spinner';
 import {
-  ClienteService
-} from './cliente.service';
+  ClientService
+} from './client.service';
 import {
   FacebookService
 } from './facebook.service';
 import {
-  LojaSettingsService
-} from './loja-settings.service';
+  StoreSettingsService
+} from './store-settings.service';
 import {
   SettingsService
 } from './settings.service';
@@ -43,9 +43,9 @@ export class CheckoutService {
     private localStorage: LocalStorage,
     private http: HttpClient,
     private settingsService: SettingsService,
-    private clienteService: ClienteService,
+    private clientService: ClientService,
     private router: Router,
-    private lojaSettingsService: LojaSettingsService,
+    private storeSettingsService: StoreSettingsService,
     private spinner: NgxSpinnerService,
     private facebookService: FacebookService,
     private ordersService: OrdersService,
@@ -53,24 +53,24 @@ export class CheckoutService {
   ) {}
 
 
-  addItemsPagarmeCheckout(produtosCarrinho) {
+  addItemsPagarmeCheckout(cartProducts) {
     return new Promise((resolve, reject) => {
 
-      let itemsCheckout: any[] = []
+      let checkoutItems: any[] = []
 
-      produtosCarrinho.forEach(produto => {
+      cartProducts.forEach(product => {
         let item = {
-          id: produto.id,
-          title: produto.name,
-          unit_price: produto.price * 100,
+          id: product.id,
+          title: product.name,
+          unit_price: product.price * 100,
           quantity: 1,
           tangible: true
         }
 
-        itemsCheckout.push(item)
+        checkoutItems.push(item)
       })
 
-      resolve(itemsCheckout)
+      resolve(checkoutItems)
     })
   }
 
@@ -86,7 +86,7 @@ export class CheckoutService {
 
         //console.log(lineItems)
 
-        this.clienteService.addCliente(param).subscribe((client: any) => {
+        this.clientService.addCliente(param).subscribe((client: any) => {
 
           if (client.info === 'new') {
             this.ngbootstrapService.show('Usuário cadastrado com sucesso', { classname: 'bg-success text-light', delay: 3000 });
@@ -124,7 +124,7 @@ export class CheckoutService {
               this.spinner.hide()
             }, 2000)
 
-            openPagarMeCheckout(this.lojaSettingsService.getPagarmeEncryptionKey(), param).then(tokenCapturaPgto => {
+            openPagarMeCheckout(this.storeSettingsService.getPagarmeEncryptionKey(), param).then(tokenCapturaPgto => {
 
               this.spinner.show()
 
@@ -134,11 +134,11 @@ export class CheckoutService {
 
               //console.log('dataParam: '+JSON.stringify(dataParam))
 
-              this.clienteService.popupModal.next('close')
+              this.clientService.popupModal.next('close')
 
               this.ordersService.capturarPgto({
                 token: tokenCapturaPgto,
-                valor: param.valorAPagar * 100
+                valor: param.totalsToPay * 100
               }).subscribe((captura: any) => {
 
                 if (captura.status === 'success') {
@@ -204,7 +204,7 @@ export class CheckoutService {
         shipping_first_name: paramShipping.nome,
         shipping_postcode: paramShipping.cep,
         shipping_state: paramShipping.uf,
-      }      
+      }
 
       let customer_pagarme = {
         external_id: '',
