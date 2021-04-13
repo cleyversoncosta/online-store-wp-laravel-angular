@@ -15,10 +15,10 @@ import {FooterPaymentsComponent} from "./footer-payments/footer-payments.compone
   ],
   imports: [
     CommonModule,
-    //FormsModule,
-    //RouterModule
+    RouterModule,
   ],
   exports: [
+    FooterComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

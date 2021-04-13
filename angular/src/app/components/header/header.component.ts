@@ -1,5 +1,5 @@
-import { StoreSettingsService } from '../../services/store-settings.service';
-import { Component, OnInit } from '@angular/core';
+import {StoreSettingsService} from '../../services/store-settings.service';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private storeSettingsService: StoreSettingsService) { }
+  constructor(private storeSettingsService: StoreSettingsService) {
+  }
 
   ngOnInit(): void {
 

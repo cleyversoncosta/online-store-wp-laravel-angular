@@ -22,8 +22,7 @@ import {TermsOfServiceComponent} from "./terms-of-service/terms-of-service.compo
 
     //FormsModule,
   ],
-  exports: [
-  ],
+  exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PoliciesAndTermsModule {

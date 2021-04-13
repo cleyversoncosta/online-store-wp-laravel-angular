@@ -1,12 +1,12 @@
-import { FacebookService } from './../../services/facebook.service';
-import { CartService } from './../../services/cart.service';
-import { StoreSettingsService } from '../../services/store-settings.service';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {FacebookService} from './../../services/facebook.service';
+import {CartService} from './../../services/cart.service';
+import {StoreSettingsService} from '../../services/store-settings.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
-import { ProductsService } from './../../services/products.service';
-import { SettingsService } from './../../services/settings.service';
-import { NgxSpinnerService } from 'ngx-spinner';
+import {ProductsService} from './../../services/products.service';
+import {SettingsService} from './../../services/settings.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-products-list',
@@ -27,7 +27,8 @@ export class ProductsListComponent implements OnInit {
     private facebookService: FacebookService,
     private settingsService: SettingsService,
     private route: ActivatedRoute
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.spinner.show();
@@ -35,14 +36,10 @@ export class ProductsListComponent implements OnInit {
     this.maxInstallments = this.storeSettingsService.getMaxInstallments();
 
     this.ProductsService.getProducts().subscribe((data: any[]) => {
-      //console.log('getProducts: '+JSON.stringify(data))
 
       for (let x = 0; x < data.length; x++) {
         data[x].image_default = data[x].images[0].src;
       }
-
-      //console.log(data)
-
       this.products = data;
       this.spinner.hide();
     });

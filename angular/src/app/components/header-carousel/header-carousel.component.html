@@ -1,0 +1,32 @@
+<div class="text-center d-block d-md-none" style="background-color: rgb(0, 0, 0);">
+  <ngb-carousel [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
+    <ng-template ngbSlide *ngFor="let image of imagesMobile, index as i">
+      <a [href]="image.url">
+        <div class="picsum-img-wrapper">
+          <img [src]="image.src" width="100%">
+        </div>
+        <div class="carousel-caption">
+          <h3>&nbsp;</h3>
+          <p>&nbsp;</p>
+        </div>
+      </a>
+    </ng-template>
+  </ngb-carousel>
+</div>
+
+
+<div class="text-center d-none d-md-block">
+  <ngb-carousel [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
+    <ng-template ngbSlide *ngFor="let image of imagesDesktop, index as i">
+      <a [href]="image.url">
+        <div class="picsum-img-wrapper">
+          <img [src]="image.src" width="100%">
+        </div>
+        <div class="carousel-caption">
+          <h3>&nbsp;</h3>
+          <p>&nbsp;</p>
+        </div>
+      </a>
+    </ng-template>
+  </ngb-carousel>
+</div>

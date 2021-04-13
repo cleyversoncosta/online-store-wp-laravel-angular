@@ -95,7 +95,7 @@ import {HeaderModule} from "./components/header/header.module";
 import {TagsModule} from "./components/tags/tags.module";
 import {PoliciesAndTermsModule} from "./components/policies-and-terms/policies-and-terms.module";
 import {NewsletterModule} from "./components/newsletter/newsletter.module";
-
+import {HeaderCarouselComponent} from "./components/header-carousel/header-carousel.component";
 
 @NgModule({
   declarations: [
@@ -116,6 +116,8 @@ import {NewsletterModule} from "./components/newsletter/newsletter.module";
     BasicCareComponent,
     CartShippingBillingComponent,
     CheckoutCompleted,
+    HeaderCarouselComponent,
+
 
     //Pipes
     BaseUrlPipe,

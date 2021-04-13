@@ -36,8 +36,8 @@ export class CartService {
 
   cart: any = []
 
-  private cartItems: BehaviorSubject < any > ;
-  private orderTotals: BehaviorSubject < any > ;
+  private cartItems: BehaviorSubject<any>;
+  private orderTotals: BehaviorSubject<any>;
 
   constructor(
     private localStorage: LocalStorage,
@@ -49,8 +49,8 @@ export class CartService {
     private spinner: NgxSpinnerService
   ) {
 
-    this.cartItems = new BehaviorSubject < any > (null)
-    this.orderTotals = new BehaviorSubject < any > (null)
+    this.cartItems = new BehaviorSubject<any>(null)
+    this.orderTotals = new BehaviorSubject<any>(null)
 
   }
 
@@ -82,14 +82,14 @@ export class CartService {
     this.orderTotals.next(orderTotals)
   }
 
-  getCartProducts(): Observable < any > {
+  getCartProducts(): Observable<any> {
     this.localStorage.getItem('cart').subscribe(products => {
       this.cartItems.next(products)
     })
     return this.cartItems.asObservable();
   }
 
-  getOrderTotals(): Observable < any > {
+  getOrderTotals(): Observable<any> {
     this.localStorage.getItem('cart').subscribe((products: any[]) => {
       let orderTotals = 0
       if (products !== null) {
@@ -104,7 +104,7 @@ export class CartService {
   }
 
 
-  getAmountCartItems(): Observable < any > {
+  getAmountCartItems(): Observable<any> {
     return this.cartItems.asObservable();
   }
 
@@ -122,7 +122,7 @@ export class CartService {
         this.orderTotals.next(orderTotals)
 
         this.localStorage.setItem('cart', products).subscribe(() => {
-          //resolve()
+          resolve('')
         })
       })
     })
@@ -135,7 +135,7 @@ export class CartService {
         this.orderTotals.next(0)
 
         this.cartItems.next([])
-        //resolve()
+        resolve('')
       })
     })
   }
